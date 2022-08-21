@@ -1,0 +1,1 @@
+composer require laravel/breeze:1.9.4
