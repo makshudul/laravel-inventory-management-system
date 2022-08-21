@@ -35,6 +35,16 @@
                               <span class="text-danger companyName_error"></span>
                             </div>
                             <div class="form-group">
+                                <label for="">Branch Name</label>
+                                <select class="form-control branch_name"  >
+                                  <option value="Bogura">------ Select Branch ------</option>
+                                  <option value="Bogura">Bogura</option>
+                                  <option value="Dhaka">Dhaka</option>
+                                  <option value="Gaibandha">Gaibandha</option>
+                                </select>
+                                <span class="text-danger" branch_name_error></span>
+                              </div>
+                            <div class="form-group">
                               <label for="">Comapany Address </label>
                               <textarea type="text" class="form-control companyAddress" placeholder="Enter the Address"></textarea>
                               <span class="text-danger companyAddress_error"></span>
@@ -93,6 +103,16 @@
                                       <span class="text-danger " id="companyName_error"></span>
                                     </div>
                                     <div class="form-group">
+                                        <label for="">Branch Name</label>
+                                        <select class="form-control" id="branch_name" >
+                                          <option value="Bogura">------ Select Branch ------</option>
+                                          <option value="Bogura">Bogura</option>
+                                          <option value="Dhaka">Dhaka</option>
+                                          <option value="Gaibandha">Gaibandha</option>
+                                        </select>
+                                        <span class="text-danger" id="branch_name_error"></span>
+                                      </div>
+                                    <div class="form-group">
                                       <label for="">Comapany Address </label>
                                       <textarea type="text" class="form-control " placeholder="Enter the Address" id="companyAddress"></textarea>
                                       <span class="text-danger " id="companyAddress_error"></span>
@@ -137,6 +157,7 @@
                           <th class="wd-15p">SL</th>
                           <th class="wd-15p">Company ID</th>
                           <th class="wd-15p">Company Name</th>
+                          <th class="wd-15p">Branch Name</th>
                           <th class="wd-15p">Address</th>
                           <th class="wd-15p">Email</th>
                           <th class="wd-15p">Phone Number</th>
@@ -167,6 +188,7 @@
             });
                 var company_id = jQuery('.company_id').val();
                 var companyName = jQuery('.companyName').val();
+                var branch_name = jQuery('.branch_name').val();
                 var companyAddress = jQuery('.companyAddress').val();
                 var companyEmail = jQuery('.companyEmail').val();
                 var companyPhNO = jQuery('.companyPhNO').val();
@@ -180,6 +202,7 @@
                 data:{
                     'company_id':company_id,
                     'companyName':companyName,
+                    'branch_name':branch_name,
                     'companyAddress':companyAddress,
                     'companyEmail':companyEmail,
                     'companyPhNO':companyPhNO,
@@ -190,6 +213,7 @@
                     if(result.msg == 'faild'){
                         jQuery('.company_id_error').text(result.errors.company_id);
                         jQuery('.companyName_error').text(result.errors.companyName);
+                        jQuery('.branch_name_error').text(result.errors.branch_name);
                         jQuery('.companyAddress_error').text(result.errors.companyAddress);
                         jQuery('.companyEmail_error').text(result.errors.companyEmail);
                         jQuery('.companyPhNO_error').text(result.errors.companyPhNO);
@@ -245,6 +269,7 @@
                             <td>'+sl+'</td>\
                             <td>'+item.company_id+'</td>\
                             <td>'+item.companyName+'</td>\
+                            <td>'+item.branch_name+'</td>\
                             <td>'+item.companyAddress+'</td>\
                             <td> '+item.companyEmail+'</td>\
                             <td> '+item.companyPhNO+'</td>\
@@ -277,6 +302,7 @@
                jQuery('#id').val(result.data.id);
                jQuery('#company_id').val(result.data.company_id);
                jQuery('#companyName').val(result.data.companyName);
+               jQuery('#branch_name').val(result.data.branch_name);
                jQuery('#companyAddress').val(result.data.companyAddress);
                jQuery('#companyEmail').val(result.data.companyEmail);
                jQuery('#companyPhNO').val(result.data.companyPhNO);
@@ -344,6 +370,7 @@
                 var id = jQuery('#id').val();
                 var company_id = jQuery('#company_id').val();
                 var companyName = jQuery('#companyName').val();
+                var branch_name = jQuery('#branch_name').val();
                 var companyAddress = jQuery('#companyAddress').val();
                 var companyEmail = jQuery('#companyEmail').val();
                 var companyPhNO = jQuery('#companyPhNO').val();
@@ -357,6 +384,7 @@
                 data:{
                     'company_id':company_id,
                     'companyName':companyName,
+                    'branch_name':branch_name,
                     'companyAddress':companyAddress,
                     'companyEmail':companyEmail,
                     'companyPhNO':companyPhNO,
@@ -367,6 +395,7 @@
                     if(result.msg == 'faild'){
                         jQuery('#company_id_error').text(result.errors.company_id);
                         jQuery('#companyName_error').text(result.errors.companyName);
+                        jQuery('#branch_name').text(result.errors.branch_name);
                         jQuery('#companyAddress_error').text(result.errors.companyAddress);
                         jQuery('#companyEmail_error').text(result.errors.companyEmail);
                         jQuery('#companyPhNO_error').text(result.errors.companyPhNO);
@@ -395,6 +424,7 @@
                          jQuery('#id').val(null);
                          jQuery('#company_id').val(null);
                          jQuery('#companyName').val(null);
+                         jQuery('#branch_name').val(null);
                          jQuery('#companyAddress').val(null);
                          jQuery('#companyEmail').val(null);
                          jQuery('#companyPhNO').val(null);

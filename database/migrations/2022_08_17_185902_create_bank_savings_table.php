@@ -16,6 +16,7 @@ class CreateBankSavingsTable extends Migration
         Schema::create('bank_savings', function (Blueprint $table) {
             $table->id();
             $table->integer('bankId');
+            $table->string('branch_name');
             $table->date('date');
             $table->string('purpose');
             $table->string('spender');

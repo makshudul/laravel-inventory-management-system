@@ -25,10 +25,15 @@
                          </div>
                          <div class="modal-body">
                             <div class="form-group">
-                              <label for="">Bank Id</label>
-                              <input type="number" class="form-control bankId" placeholder="Bank ID">
-                              <span class="text-danger bankId_error "></span>
-                            </div>
+                                <label for="">Branch Name</label>
+                                <select class="form-control branch_name " >
+                                  <option value="Bogura">------ Select Branch ------</option>
+                                  <option value="Bogura">Bogura</option>
+                                  <option value="Dhaka">Dhaka</option>
+                                  <option value="Gaibandha">Gaibandha</option>
+                                </select>
+                                <span class="text-danger branch_name_error"></span>
+                              </div>
                             <div class="form-group">
                               <label for="">Date</label>
                               <input type="date" class="form-control date"  >
@@ -36,28 +41,19 @@
                             </div>
                             <div class="form-group">
                               <label for="">Purpose </label>
-                              <textarea type="text" class="form-control purpose" placeholder="Enter Purpose"></textarea>
+                              <input type="text" class="form-control purpose" placeholder="Enter Purpose">
                               <span class="text-danger purpose_error"></span>
                             </div>
                             <div class="form-group">
-                              <label for="">spender</label>
-                              <input type="text" class="form-control spender" placeholder=" Enter spender">
+                              <label for="">Amount</label>
+                              <input type="number" class="form-control amount" placeholder=" Enter Amount">
                               <span class="text-danger amount_error"></span>
                             </div>
                             <div class="form-group">
-                                <label for="">Debit & Credit</label>
-                                <select class="form-control debit_credit">
-                                  <option value="debit">------ Select Option  ------</option>
-                                  <option value="debit">debit</option>
-                                  <option value="credit">credit</option>
-                                </select>
-                                <strong class="text-danger" id="debit_credit_error" ></strong>
-                              </div>
-                              <div class="form-group">
-                                <label for="">Amount</label>
-                                <input type="text" class="form-control amount" placeholder=" Enter amount">
-                                <span class="text-danger amount_error"></span>
-                              </div>
+                              <label for="">remark</label>
+                              <input type="text" class="form-control remark" placeholder=" Enter Remark">
+                              <span class="text-danger remark_error"></span>
+                            </div>
                        </div>
 
                         <div class="modal-footer">
@@ -81,34 +77,36 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group">
-                                      <label for="">Bank Id</label>
-                                      <input type="number" class="form-control bankId" placeholder="Bank ID">
-                                      <span class="text-danger bankId_error "></span>
-                                    </div>
+                                        <label for="">Branch Name</label>
+                                        <input type="text" class="form-control" id="id"  >
+                                        <select class="form-control" id="branch_name" >
+                                          <option value="Bogura">------ Select Branch ------</option>
+                                          <option value="Bogura">Bogura</option>
+                                          <option value="Dhaka">Dhaka</option>
+                                          <option value="Gaibandha">Gaibandha</option>
+                                        </select>
+                                        <span class="text-danger" id="branch_name_error"></span>
+                                      </div>
                                     <div class="form-group">
                                       <label for="">Date</label>
-                                      <input type="date" class="form-control date"  >
-                                      <span class="text-danger date_error"></span>
+                                      <input type="date" class="form-control" id="date"  >
+                                      <span class="text-danger" id="date_error"></span>
                                     </div>
                                     <div class="form-group">
                                       <label for="">Purpose </label>
-                                      <textarea type="text" class="form-control purpose" placeholder="Enter Purpose"></textarea>
-                                      <span class="text-danger purpose_error"></span>
+                                      <input type="text" class="form-control" id="purpose" placeholder="Enter Purpose">
+                                      <span class="text-danger " id="purpose_error"></span>
                                     </div>
                                     <div class="form-group">
-                                      <label for="">spender</label>
-                                      <input type="text" class="form-control amount" placeholder=" Enter spender">
-                                      <span class="text-danger amount_error"></span>
+                                      <label for="">Amount</label>
+                                      <input type="number" class="form-control" id="amount" placeholder=" Enter Amount">
+                                      <span class="text-danger" id="amount_error"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Debit & Credit</label>
-                                        <select class="form-control debit_credit">
-                                          <option value="debit">------ Select Option  ------</option>
-                                          <option value="debit">debit</option>
-                                          <option value="credit">credit</option>
-                                        </select>
-                                        <strong class="text-danger" id="debit_credit_error" ></strong>
-                                      </div>
+                                      <label for="">Remark</label>
+                                      <input type="text" class="form-control" id="remark" placeholder=" Enter Remark">
+                                      <span class="text-danger " id="remark_error"></span>
+                                    </div>
                                </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -127,12 +125,11 @@
                       <thead>
                         <tr>
                             <th class="wd-15p">SL</th>
-                            <th class="wd-15p">Bank ID</th>
+                            <th class="wd-15p">Branch Name</th>
                             <th class="wd-15p">Date</th>
                             <th class="wd-15p">Purpose</th>
-                            <th class="wd-15p">spender</th>
-                            <th class="wd-15p">Debit</th>
-                            <th class="wd-15p">Credit</th>
+                            <th class="wd-15p">Amount</th>
+                            <th class="wd-15p">Remark</th>
                             <th class="wd-25p">Action</th>
                         </tr>
                       </thead>
@@ -156,36 +153,30 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-                var company_id = jQuery('.company_id').val();
-                var companyName = jQuery('.companyName').val();
-                var companyAddress = jQuery('.companyAddress').val();
-                var companyEmail = jQuery('.companyEmail').val();
-                var companyPhNO = jQuery('.companyPhNO').val();
-                var companyManagerName = jQuery('.companyManagerName').val();
-                var due = jQuery('.due').val();
+                var branch_name = jQuery('.branch_name').val();
+                var date = jQuery('.date').val();
+                var purpose = jQuery('.purpose').val();
+                var amount = jQuery('.amount').val();
+                var remark = jQuery('.remark').val();
 
             $.ajax({
-                url:'/company/insert',
+                url:'/cost/insert',
                 type:'POST',
                 dataType:'json',
                 data:{
-                    'company_id':company_id,
-                    'companyName':companyName,
-                    'companyAddress':companyAddress,
-                    'companyEmail':companyEmail,
-                    'companyPhNO':companyPhNO,
-                    'companyManagerName':companyManagerName,
-                    'due':due
+                    'branch_name':branch_name,
+                    'date':date,
+                    'purpose':purpose,
+                    'amount':amount,
+                    'remark':remark
                 },
                 success:function(result){
                     if(result.msg == 'faild'){
-                        jQuery('.company_id_error').text(result.errors.company_id);
-                        jQuery('.companyName_error').text(result.errors.companyName);
-                        jQuery('.companyAddress_error').text(result.errors.companyAddress);
-                        jQuery('.companyEmail_error').text(result.errors.companyEmail);
-                        jQuery('.companyPhNO_error').text(result.errors.companyPhNO);
-                        jQuery('.companyManagerName_error').text(result.errors.companyManagerName);
-                        jQuery('.due_error').text(result.errors.due);
+                        jQuery('.branch_name_error').text(result.errors.branch_name);
+                        jQuery('.date_error').text(result.errors.date);
+                        jQuery('.purpose_error').text(result.errors.purpose);
+                        jQuery('.amount_error').text(result.errors.amount);
+                        jQuery('.remark_error').text(result.errors.remark);
                     }
                     else{
                         showData();
@@ -204,15 +195,13 @@
 
                         Toast.fire({
                         icon: 'success',
-                        title: 'Product Insert Successfully'
+                        title: 'Cost Insert Successfully'
                         })
-                        jQuery('.company_id').val(null);
-                        jQuery('.companyName').val(null);
-                        jQuery('.companyAddress').val(null);
-                        jQuery('.companyEmail').val(null);
-                        jQuery('.companyPhNO').val(null);
-                        jQuery('.companyManagerName').val(null);
-                        jQuery('.due').val(null);
+                        jQuery('.branch_name').val(null);
+                        jQuery('.date').val(null);
+                        jQuery('.purpose').val(null);
+                        jQuery('.amount').val(null);
+                        jQuery('.remark').val(null);
 
                     }
                 }
@@ -225,7 +214,7 @@
               //*****************************show Data ************************
               function showData(){
               $.ajax({
-                url:'/company/show',
+                url:'/cost/show',
                 type:'GET',
                 dataType:'json',
                 success:function(result){
@@ -234,13 +223,11 @@
                     $.each(result.data,function(key,item){
                       jQuery(".datashow").append('<tr>\
                             <td>'+sl+'</td>\
-                            <td>'+item.company_id+'</td>\
-                            <td>'+item.companyName+'</td>\
-                            <td>'+item.companyAddress+'</td>\
-                            <td> '+item.companyEmail+'</td>\
-                            <td> '+item.companyPhNO+'</td>\
-                            <td> '+item.companyManagerName+'</td>\
-                            <td> '+item.due+'</td>\
+                            <td>'+item.branch_name+'</td>\
+                            <td>'+item.date+'</td>\
+                            <td>'+item.purpose+'</td>\
+                            <td> '+item.amount+'</td>\
+                            <td> '+item.remark+'</td>\
                             <td>\
                                 <button class="btn btn-sm btn-info productedit" data-target="#EditCategory"  data-toggle="modal" value="'+item.id+'"><i class="fa fa-edit"></i> Edit</button>\
                                 <button class="btn btn-sm btn-danger productdelete" value="'+item.id+'"><i class="fa fa-trash"></i> Delete</button>\
@@ -261,18 +248,16 @@
         jQuery(document).on('click','.productedit',function(){
             var id=jQuery(this).val();
             $.ajax({
-               url:'/company/single/data/show/'+id,
+               url:'/cost/single/data/show/'+id,
                type:'GET',
                dataType:'json',
                success:function(result){
                jQuery('#id').val(result.data.id);
-               jQuery('#company_id').val(result.data.company_id);
-               jQuery('#companyName').val(result.data.companyName);
-               jQuery('#companyAddress').val(result.data.companyAddress);
-               jQuery('#companyEmail').val(result.data.companyEmail);
-               jQuery('#companyPhNO').val(result.data.companyPhNO);
-               jQuery('#companyManagerName').val(result.data.companyManagerName);
-               jQuery('#due').val(result.data.due);
+               jQuery('#branch_name').val(result.data.branch_name);
+               jQuery('#date').val(result.data.date);
+               jQuery('#purpose').val(result.data.purpose);
+               jQuery('#amount').val(result.data.amount);
+               jQuery('#remark').val(result.data.remark);
                }
 
            });
@@ -294,7 +279,7 @@
                     }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                        url:'/company/delete/'+id,
+                        url:'/cost/delete/'+id,
                         type:'GET',
                         dataType:'JSON',
                         success:function(response){
@@ -333,36 +318,30 @@
                 }
             });
                 var id = jQuery('#id').val();
-                var company_id = jQuery('#company_id').val();
-                var companyName = jQuery('#companyName').val();
-                var companyAddress = jQuery('#companyAddress').val();
-                var companyEmail = jQuery('#companyEmail').val();
-                var companyPhNO = jQuery('#companyPhNO').val();
-                var companyManagerName = jQuery('#companyManagerName').val();
-                var due = jQuery('#due').val();
+                var branch_name = jQuery('#branch_name').val();
+                var date = jQuery('#date').val();
+                var purpose = jQuery('#purpose').val();
+                var amount = jQuery('#amount').val();
+                var remark = jQuery('#remark').val();
 
             $.ajax({
-                url:'/company/update/'+id,
+                url:'/cost/update/'+id,
                 type:'POST',
                 dataType:'json',
                 data:{
-                    'company_id':company_id,
-                    'companyName':companyName,
-                    'companyAddress':companyAddress,
-                    'companyEmail':companyEmail,
-                    'companyPhNO':companyPhNO,
-                    'companyManagerName':companyManagerName,
-                    'due':due
+                    'branch_name':branch_name,
+                    'date':date,
+                    'purpose':purpose,
+                    'amount':amount,
+                    'remark':remark
                 },
                 success:function(result){
                     if(result.msg == 'faild'){
-                        jQuery('#company_id_error').text(result.errors.company_id);
-                        jQuery('#companyName_error').text(result.errors.companyName);
-                        jQuery('#companyAddress_error').text(result.errors.companyAddress);
-                        jQuery('#companyEmail_error').text(result.errors.companyEmail);
-                        jQuery('#companyPhNO_error').text(result.errors.companyPhNO);
-                        jQuery('#companyManagerName_error').text(result.errors.companyManagerName);
-                        jQuery('#due_error').text(result.errors.due);
+                        jQuery('#branch_name_error').text(result.errors.branch_name);
+                        jQuery('#date_error').text(result.errors.date);
+                        jQuery('#purpose_error').text(result.errors.purpose);
+                        jQuery('#amount_error').text(result.errors.amount);
+                        jQuery('#remark_error').text(result.errors.remark);
                     }
                    else{
                         showData();
@@ -381,16 +360,19 @@
 
                         Toast.fire({
                         icon: 'success',
-                        title: 'Product Update Successfully'
+                        title: 'Cost Update Successfully'
                         })
-                         jQuery('#id').val(null);
-                         jQuery('#company_id').val(null);
-                         jQuery('#companyName').val(null);
-                         jQuery('#companyAddress').val(null);
-                         jQuery('#companyEmail').val(null);
-                         jQuery('#companyPhNO').val(null);
-                         jQuery('#companyManagerName').val(null);
-                         jQuery('#due').val(null);
+                        jQuery('#branch_name').val(null);
+                        jQuery('#date').val(null);
+                        jQuery('#purpose').val(null);
+                        jQuery('#amount').val(null);
+                        jQuery('#remark').val(null);
+                        // this is error value null code
+                        jQuery('#branch_name_error').text(null);
+                        jQuery('#date_error').text(null);
+                        jQuery('#purpose_error').text(null);
+                        jQuery('#amount_error').text(null);
+                        jQuery('#remark_error').text(null);
 
                     }
                 }

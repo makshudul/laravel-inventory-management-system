@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BankCost;
 use App\Models\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class BankCostController extends Controller
+class BranchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class BankCostController extends Controller
      */
     public function index()
     {
-        return view('backend.page.bank_details.bank_cost');
+        return view('backend.page.branch.branch');
     }
 
     /**
@@ -26,7 +25,7 @@ class BankCostController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -38,12 +37,13 @@ class BankCostController extends Controller
     public function store(Request $request)
     {
         $validator= validator::make($request->all(),[
-            'bankId'=>'required|unique:bank_costs,bankId',
             'branch_name'=>'required',
-            'date'=>'required|date',
-            'purpose'=>'required',
-            'amount'=>'required|integer',
-            'remark'=>'required',
+            'manager'=>'required',
+            'phone'=>'required',
+            'email'=>'required|email',
+        ],[
+            'branch_name.required'=>'Branch Name Field is Required',
+            'manager.required'=>'Manager Name Field is Required',
         ]);
         if($validator->fails()){
             return response()->json([
@@ -52,13 +52,11 @@ class BankCostController extends Controller
             ]);
         }
         else{
-            $datainsert=new BankCost();
-            $datainsert->bankId = $request->bankId;
+            $datainsert=new Branch();
             $datainsert->branch_name = $request->branch_name;
-            $datainsert->date = $request->date;
-            $datainsert->purpose = $request->purpose;
-            $datainsert->amount = $request->amount;
-            $datainsert->remark = $request->remark;
+            $datainsert->manger_name = $request->manager;
+            $datainsert->phone = $request->phone;
+            $datainsert->email = $request->email;
             $datainsert->save();
             return response()->json([
                 "msg"=>'success',
@@ -70,18 +68,10 @@ class BankCostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\BankCost  $bankCost
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Http\Response
      */
     public function show()
-    {
-        $data = BankCost::all();
-        return response()->json([
-            'data'=>$data
-
-        ]);
-    }
-    public function showbranchName()
     {
         $data = Branch::all();
         return response()->json([
@@ -93,14 +83,14 @@ class BankCostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\BankCost  $bankCost
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data=BankCost::find($id);
+        $data=Branch::find($id);
         return response()->json([
-             'data'=>$data
+            'data'=>$data
         ]);
     }
 
@@ -108,18 +98,21 @@ class BankCostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BankCost  $bankCost
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $validator= validator::make($request->all(),[
-            'bankId'=>'required|unique:bank_costs,bankId,'.$id,
-            'date'=>'required|date',
             'branch_name'=>'required',
-            'purpose'=>'required',
-            'amount'=>'required|integer',
-            'remark'=>'required',
+            'manager'=>'required',
+            'phone'=>'required',
+            'email'=>'required|email',
+        ],[
+            'branch_name.required'=>'Branch Name Field is Required',
+            'manager.required'=>'Manager Name Field is Required',
+            'phone.required'=>'Phone Field is Required',
+            'email.required'=>'Email Name Field is Required',
         ]);
         if($validator->fails()){
             return response()->json([
@@ -128,13 +121,11 @@ class BankCostController extends Controller
             ]);
         }
         else{
-            $datainsert=BankCost::find($id);
-            $datainsert->bankId = $request->bankId;
+            $datainsert= Branch::find($id);
             $datainsert->branch_name = $request->branch_name;
-            $datainsert->date = $request->date;
-            $datainsert->purpose = $request->purpose;
-            $datainsert->amount = $request->amount;
-            $datainsert->remark = $request->remark;
+            $datainsert->manger_name = $request->manager;
+            $datainsert->phone = $request->phone;
+            $datainsert->email = $request->email;
             $datainsert->update();
             return response()->json([
                 "msg"=>'success',
@@ -146,14 +137,15 @@ class BankCostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\BankCost  $bankCost
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-    BankCost::find($id)->delete();
-    return response()->json([
-        'msg'=>'success'
-    ]);
+        Branch::find($id)->delete();
+        return response()->json([
+            'msg'=>'success'
+
+        ]);
     }
 }

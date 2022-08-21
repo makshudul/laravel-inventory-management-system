@@ -16,6 +16,7 @@ class CreateBankCostsTable extends Migration
         Schema::create('bank_costs', function (Blueprint $table) {
             $table->id();
             $table->integer('bankId');
+            $table->string('branch_name');
             $table->date('date');
             $table->string('purpose');
             $table->integer('amount');

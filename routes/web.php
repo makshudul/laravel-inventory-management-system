@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BankCostController;
 use App\Http\Controllers\BankSavingController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CostController;
 use App\Http\Controllers\EmployeeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductCodeController;
 use App\Models\BankSaving;
+use App\Models\Branch;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,17 @@ Route::get('/dashboard', function () {
     return view('backend.dashboard.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-// Route Product Code Controller
+// Route Branch Group Controller
+Route::prefix('/branch')->group(function () {
+Route::get('/index',[BranchController::class,'index'])->name('branch');
+Route::post('/insert',[BranchController::class,'store']);
+Route::get('/show',[BranchController::class,'show']);
+Route::get('/single/data/show/{id}',[BranchController::class,'edit']);
+Route::get('/delete/{id}',[BranchController::class,'destroy']);
+Route::post('/update/{id}',[BranchController::class,'update']);
+});
+
+// Route Branch Controller
 Route::get('/product/code',[ProductCodeController::class,'index'])->name('Product_code');
 Route::post('/product/code/insert',[ProductCodeController::class,'store']);
 
@@ -67,16 +79,18 @@ Route::post('/bank/saving/update/{id}',[BankSavingController::class,'update']);
 Route::get('/bank/cost',[BankCostController::class,'index'])->name('Bankcost');
 Route::post('/bank/cost/insert',[BankCostController::class,'store']);
 Route::get('/bank/cost/show',[BankCostController::class,'show']);
+Route::get('/bank/branch/show',[BankCostController::class,'showbranchName']);
 Route::get('/bank/cost/single/data/show/{id}',[BankCostController::class,'edit']);
 Route::get('/bank/cost/delete/{id}',[BankCostController::class,'destroy']);
 Route::post('/bank/cost/update/{id}',[BankCostController::class,'update']);
 
-// Route Cost Controller
-Route::get('/cost',[CostController::class,'index'])->name('cost');
-Route::post('/cost/insert',[CostController::class,'store']);
-Route::get('/cost/show',[CostController::class,'show']);
-Route::get('/cost/single/data/show/{id}',[CostController::class,'edit']);
-Route::get('/cost/delete/{id}',[CostController::class,'destroy']);
-Route::post('/cost/update/{id}',[CostController::class,'update']);
-
+// Route Cost Controller with group
+Route::prefix('/cost')->group(function () {
+Route::get('/view',[CostController::class,'index'])->name('cost');
+Route::post('/insert',[CostController::class,'store']);
+Route::get('/show',[CostController::class,'show']);
+Route::get('/single/data/show/{id}',[CostController::class,'edit']);
+Route::get('/delete/{id}',[CostController::class,'destroy']);
+Route::post('/update/{id}',[CostController::class,'update']);
+});
 require __DIR__.'/auth.php';

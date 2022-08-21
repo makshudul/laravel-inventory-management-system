@@ -31,6 +31,13 @@
                               <span class="text-danger bankId_error "></span>
                             </div>
                             <div class="form-group">
+                                <label for="">Branch Name</label>
+                                <select class="form-control branch_name" >
+                                  <option value="Bogura">------ Select Branch ------</option>
+                                </select>
+                                <span class="text-danger branch_name_error" ></span>
+                              </div>
+                            <div class="form-group">
                               <label for="">Date</label>
                               <input type="date" class="form-control date"  >
                               <span class="text-danger date_error"></span>
@@ -79,6 +86,12 @@
                                       <span class="text-danger " id="bankId_error"></span>
                                     </div>
                                     <div class="form-group">
+                                        <label for="">Branch Name</label>
+                                        <select class="form-control " id="branch_name" >
+                                        </select>
+                                        <span class="text-danger" id="branch_name_error"></span>
+                                      </div>
+                                    <div class="form-group">
                                       <label for="">Date</label>
                                       <input type="date" class="form-control" id="date"  >
                                       <span class="text-danger" id="date_error"></span>
@@ -117,6 +130,7 @@
                         <tr>
                           <th class="wd-15p">SL</th>
                           <th class="wd-15p">Bank ID</th>
+                          <th class="wd-15p">Bank Name</th>
                           <th class="wd-15p">Date</th>
                           <th class="wd-15p">Purpose</th>
                           <th class="wd-15p">amount</th>
@@ -137,6 +151,8 @@
 <script>
     jQuery(document).ready(function(){
         showData();
+        showbranchData();
+        showbranchEditData();
             // *************************************** DataInsert section *********************
         jQuery(document).on('click','.SaveData',function(){
          $.ajaxSetup({
@@ -145,6 +161,7 @@
                 }
             });
                 var bankId = jQuery('.bankId').val();
+                var branch_name = jQuery('.branch_name').val();
                 var date = jQuery('.date').val();
                 var purpose = jQuery('.purpose').val();
                 var amount = jQuery('.amount').val();
@@ -156,6 +173,7 @@
                 dataType:'json',
                 data:{
                     'bankId':bankId,
+                    'branch_name':branch_name,
                     'date':date,
                     'purpose':purpose,
                     'amount':amount,
@@ -164,6 +182,7 @@
                 success:function(result){
                     if(result.msg == 'faild'){
                         jQuery('.bankId_error').text(result.errors.bankId);
+                        jQuery('.branch_name_error').text(result.errors.branch_name);
                         jQuery('.date_error').text(result.errors.date);
                         jQuery('.purpose_error').text(result.errors.purpose);
                         jQuery('.amount_error').text(result.errors.amount);
@@ -171,6 +190,7 @@
                     }
                     else{
                         showData();
+                        showbranchData();
                         $('#DataInsertModal').modal('hide');
                       const Toast = Swal.mixin({
                         toast: true,
@@ -189,6 +209,7 @@
                         title: ' Bank Cost Insert Successfully'
                         })
                         jQuery('.bankId').val(null);
+                        jQuery('.branch_name').val(null);
                         jQuery('.date').val(null);
                         jQuery('.purpose').val(null);
                         jQuery('.amount').val(null);
@@ -215,6 +236,7 @@
                       jQuery(".datashow").append('<tr>\
                             <td>'+sl+'</td>\
                             <td>'+item.bankId+'</td>\
+                            <td>'+item.branch_name+'</td>\
                             <td>'+item.date+'</td>\
                             <td>'+item.purpose+'</td>\
                             <td> '+item.amount+'</td>\
@@ -245,6 +267,7 @@
                success:function(result){
                jQuery('#id').val(result.data.id);
                jQuery('#bankId').val(result.data.bankId);
+               jQuery('#branch_name').val(result.data.branch_name);
                jQuery('#date').val(result.data.date);
                jQuery('#purpose').val(result.data.purpose);
                jQuery('#amount').val(result.data.amount);
@@ -310,6 +333,7 @@
             });
                var id=jQuery('#id').val();
                 var bankId = jQuery('#bankId').val();
+                var branch_name = jQuery('#branch_name').val();
                 var date = jQuery('#date').val();
                 var purpose = jQuery('#purpose').val();
                 var amount = jQuery('#amount').val();
@@ -321,6 +345,7 @@
                 dataType:'json',
                 data:{
                     'bankId':bankId,
+                    'branch_name':branch_name,
                     'date':date,
                     'purpose':purpose,
                     'amount':amount,
@@ -329,6 +354,7 @@
                 success:function(result){
                     if(result.msg == 'faild'){
                         jQuery('#bankId_error').text(result.errors.bankId);
+                        jQuery('#branch_name_error').text(result.errors.branch_name);
                         jQuery('#date_error').text(result.errors.date);
                         jQuery('#purpose_error').text(result.errors.purpose);
                         jQuery('#amount_error').text(result.errors.amount);
@@ -336,6 +362,7 @@
                     }
                    else{
                         showData();
+                        showbranchData();
                         $('#EditCategory').modal('hide');
                       const Toast = Swal.mixin({
                         toast: true,
@@ -354,6 +381,7 @@
                         title: 'Product Update Successfully'
                         })
                         jQuery('#bankId').val(null);
+                        jQuery('#branch_name').val(null);
                         jQuery('#date').val(null);
                         jQuery('#purpose').val(null);
                         jQuery('#amount').val(null);
@@ -366,7 +394,51 @@
 
          });
 
+              //*****************************Branch show  Data ************************
+              function showbranchData(){
+              $.ajax({
+                url:'/bank/branch/show',
+                type:'GET',
+                dataType:'json',
+                success:function(result){
+                    var sl=1;
+                    jQuery('.branch_name').html(' ');
+                    jQuery('.branch_name').html('<option value="">------ Select Branch ------</option>');
+                    $.each(result.data,function(key,item){
+                        jQuery('.branch_name').append('\
+                        <option value="'+item.branch_name+'">'+item.branch_name+'</option>\
+                        ');
+                           sl++;
+                    });
 
+                }
+
+            });
+        }
+
+        // ****************************** end Branch Show Data**************************
+          //*****************************Branch Edit  Data ************************
+          function showbranchEditData(){
+              $.ajax({
+                url:'/bank/branch/show',
+                type:'GET',
+                dataType:'json',
+                success:function(result){
+                    var sl=1;
+                         jQuery('#branch_name').html(' ');
+                    $.each(result.data,function(key,item){
+                        jQuery('#branch_name').append('\
+                        <option value="'+item.branch_name+'">'+item.branch_name+'</option>\
+                        ');
+                           sl++;
+                    });
+
+                }
+
+            });
+        }
+
+        // ****************************** end Branch Show Data**************************
     });
 </script>
 

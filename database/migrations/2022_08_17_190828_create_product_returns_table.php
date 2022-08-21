@@ -17,6 +17,7 @@ class CreateProductReturnsTable extends Migration
             $table->id();
             $table->date('date');
             $table->integer('pBarcode');
+            $table->string('branch_name');
             $table->string('pName');
             $table->integer('pPrice');
             $table->integer('quantity');

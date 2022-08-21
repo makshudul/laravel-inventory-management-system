@@ -39,6 +39,7 @@ class CompanyController extends Controller
         $validator= validator::make($request->all(),[
             'company_id'=>'required|unique:companies,company_id|integer|min:4',
             'companyName'=>'required',
+            'branch_name'=>'required',
             'companyAddress'=>'required',
             'companyEmail'=>'required',
             'companyPhNO'=>'required|integer',
@@ -55,6 +56,7 @@ class CompanyController extends Controller
             $datainsert=new Company();
             $datainsert->company_id = $request->company_id;
             $datainsert->companyName = $request->companyName;
+            $datainsert->branch_name = $request->branch_name;
             $datainsert->companyAddress = $request->companyAddress;
             $datainsert->companyEmail = $request->companyEmail;
             $datainsert->companyPhNO = $request->companyPhNO;
@@ -111,6 +113,7 @@ class CompanyController extends Controller
         $validator= validator::make($request->all(),[
             'company_id'=>'required|integer|min:4|unique:companies,company_id,'.$id,
             'companyName'=>'required',
+            'branch_name'=>'required',
             'companyAddress'=>'required',
             'companyEmail'=>'required',
             'companyPhNO'=>'required|integer',
@@ -127,6 +130,7 @@ class CompanyController extends Controller
             $dataupdate= Company::find($id);
             $dataupdate->company_id = $request->company_id;
             $dataupdate->companyName = $request->companyName;
+            $dataupdate->branch_name = $request->branch_name;
             $dataupdate->companyAddress = $request->companyAddress;
             $dataupdate->companyEmail = $request->companyEmail;
             $dataupdate->companyPhNO = $request->companyPhNO;

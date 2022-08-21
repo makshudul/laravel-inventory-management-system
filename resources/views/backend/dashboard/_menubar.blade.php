@@ -8,6 +8,14 @@
           <span class="menu-item-label">Dashboard</span>
         </a><!-- br-menu-link -->
       </li><!-- br-menu-item -->
+                  <!-- this is branch section  -->
+      <li class="br-menu-item">
+        <a href="{{ Route('branch') }}" class="br-menu-link">
+          <i class="fas fa-briefcase tx-24"></i>
+          <span class="menu-item-label">Branch</span>
+        </a><!-- br-menu-link -->
+      </li><!-- br-menu-item -->
+         <!-- End Branch section  -->
                   <!-- this is product section  -->
       <li class="br-menu-item">
         <a href="#" class="br-menu-link with-sub">
@@ -15,7 +23,6 @@
           <span class="menu-item-label">Product</span>
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub">
-            <li class="sub-item"><a href="{{Route('Product_code') }}" class="sub-link">Insert Product Code</a></li>
             <li class="sub-item"><a href="{{Route('product')}}" class="sub-link">Insert Product</a></li>
           </ul>
       </li><!-- br-menu-item -->

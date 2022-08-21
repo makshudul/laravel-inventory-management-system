@@ -15,6 +15,11 @@ class CreateCostsTable extends Migration
     {
         Schema::create('costs', function (Blueprint $table) {
             $table->id();
+            $table->string('branch_name');
+            $table->date('date');
+            $table->string('purpose');
+            $table->integer('amount');
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

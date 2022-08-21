@@ -39,6 +39,7 @@ class EmployeeController extends Controller
         $validator= validator::make($request->all(),[
             'emId'=>'required|unique:employees,emId|integer|min:4',
             'name'=>'required',
+            'branch_name'=>'required',
             'fName'=>'required',
             'mName'=>'required',
             'sex'=>'required',
@@ -57,6 +58,7 @@ class EmployeeController extends Controller
         else{
             $datainsert=new Employee();
             $datainsert->emId = $request->emId;
+            $datainsert->branch_name = $request->branch_name;
             $datainsert->name = $request->name;
             $datainsert->fName = $request->fName;
             $datainsert->mName = $request->mName;
@@ -114,6 +116,7 @@ class EmployeeController extends Controller
     {
         $validator= validator::make($request->all(),[
             'emId'=>'required|unique:employees,emId,'.$id,
+            'branch_name'=>'required',
             'name'=>'required',
             'fName'=>'required',
             'mName'=>'required',
@@ -133,6 +136,7 @@ class EmployeeController extends Controller
         else{
             $datainsert= Employee::find($id);
             $datainsert->emId = $request->emId;
+            $datainsert->branch_name = $request->branch_name;
             $datainsert->name = $request->name;
             $datainsert->fName = $request->fName;
             $datainsert->mName = $request->mName;

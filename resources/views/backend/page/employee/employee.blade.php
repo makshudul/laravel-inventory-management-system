@@ -30,6 +30,16 @@
                               <span class="text-danger emId_error "></span>
                             </div>
                             <div class="form-group">
+                                <label for="">Branch Name</label>
+                                <select class="form-control branch_name"  >
+                                  <option value="Bogura">------ Select Branch ------</option>
+                                  <option value="Bogura">Bogura</option>
+                                  <option value="Dhaka">Dhaka</option>
+                                  <option value="Gaibandha">Gaibandha</option>
+                                </select>
+                                <span class="text-danger branch_name_error"></span>
+                              </div>
+                            <div class="form-group">
                               <label for="">Employee Name</label>
                               <input type="text" class="form-control name" placeholder=" Name" >
                               <span class="text-danger name_error"></span>
@@ -107,6 +117,16 @@
                                       <input type="number" class="form-control" id="emId">
                                       <span class="text-danger " id="emId_error"></span>
                                     </div>
+                                     <div class="form-group">
+                                        <label for="">Branch Name</label>
+                                        <select class="form-control" id="branch_name" >
+                                          <option value="Bogura">------ Select Branch ------</option>
+                                          <option value="Bogura">Bogura</option>
+                                          <option value="Dhaka">Dhaka</option>
+                                          <option value="Gaibandha">Gaibandha</option>
+                                        </select>
+                                        <span class="text-danger" id="branch_name_error"></span>
+                                      </div>
                                     <div class="form-group">
                                       <label for="">Employee Name</label>
                                       <input type="text" class="form-control " id="name" placeholder=" Name" >
@@ -176,6 +196,7 @@
                         <tr>
                           <th class="wd-15p">SL</th>
                           <th class="wd-15p">Employee ID</th>
+                          <th class="wd-15p">Branch Name</th>
                           <th class="wd-15p"> Name</th>
                           <th class="wd-15p"> Father Name</th>
                           <th class="wd-15p"> Mother Name</th>
@@ -209,6 +230,7 @@
                 }
             });
                 var emId = jQuery('.emId').val();
+                var branch_name = jQuery('.branch_name').val();
                 var name = jQuery('.name').val();
                 var fName = jQuery('.fName').val();
                 var mName = jQuery('.mName').val();
@@ -225,6 +247,7 @@
                 dataType:'json',
                 data:{
                     'emId':emId,
+                    'branch_name':branch_name,
                     'name':name,
                     'fName':fName,
                     'mName':mName,
@@ -238,6 +261,7 @@
                 success:function(result){
                     if(result.msg == 'faild'){
                         jQuery('.emId_error').text(result.errors.emId);
+                        jQuery('.branch_name_error').text(result.errors.branch_name);
                         jQuery('.name_error').text(result.errors.name);
                         jQuery('.fName_error').text(result.errors.fName);
                         jQuery('.mName_error').text(result.errors.mName);
@@ -268,6 +292,7 @@
                         title: 'Employee Insert Successfully'
                         })
                          jQuery('.emId').val(null);
+                         jQuery('.branch_name').val(null);
                          jQuery('.name').val(null);
                          jQuery('.fName').val(null);
                          jQuery('.mName').val(null);
@@ -299,6 +324,7 @@
                       jQuery(".datashow").append('<tr>\
                             <td>'+sl+'</td>\
                             <td>'+item.emId+'</td>\
+                            <td>'+item.branch_name+'</td>\
                             <td>'+item.name+'</td>\
                             <td>'+item.fName+'</td>\
                             <td> '+item.mName+'</td>\
@@ -334,6 +360,7 @@
                success:function(result){
                  jQuery('#id').val(result.data.id);
                  jQuery('#emId').val(result.data.emId);
+                 jQuery('#branch_name').val(result.data.branch_name);
                  jQuery('#name').val(result.data.name);
                  jQuery('#fName').val(result.data.fName);
                  jQuery('#mName').val(result.data.mName);
@@ -404,6 +431,7 @@
             });
                 var id=jQuery('#id').val();
                 var emId = jQuery('#emId').val();
+                var branch_name = jQuery('#branch_name').val();
                 var name = jQuery('#name').val();
                 var fName = jQuery('#fName').val();
                 var mName = jQuery('#mName').val();
@@ -420,6 +448,7 @@
                 dataType:'json',
                 data:{
                     'emId':emId,
+                    'branch_name':branch_name,
                     'name':name,
                     'fName':fName,
                     'mName':mName,
@@ -433,6 +462,7 @@
                 success:function(result){
                     if(result.msg == 'faild'){
                         jQuery('#emId_error').text(result.errors.emId);
+                        jQuery('#branch_name_error').text(result.errors.branch_name);
                         jQuery('#name_error').text(result.errors.name);
                         jQuery('#fName_error').text(result.errors.fName);
                         jQuery('#mName_error').text(result.errors.mName);
@@ -464,6 +494,7 @@
                         })
                          jQuery('#id').val(null);
                          jQuery('#emId').val(null);
+                         jQuery('#branch_name').val(null);
                          jQuery('#name').val(null);
                          jQuery('#fName').val(null);
                          jQuery('#mName').val(null);
