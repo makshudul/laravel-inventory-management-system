@@ -30,6 +30,13 @@
                               <span class="text-danger bankId_error "></span>
                             </div>
                             <div class="form-group">
+                                <label for="">Branch Name</label>
+                                <select class="form-control branch_name" >
+                                  <option value="Bogura">------ Select Branch ------</option>
+                                </select>
+                                <span class="text-danger branch_name_error" ></span>
+                              </div>
+                            <div class="form-group">
                               <label for="">Date</label>
                               <input type="date" class="form-control date"  >
                               <span class="text-danger date_error"></span>
@@ -47,7 +54,7 @@
                             <div class="form-group">
                                 <label for="">Debit & Credit</label>
                                 <select class="form-control debit_credit">
-                                  <option value="debit">------ Select Option  ------</option>
+                                  <option value="">------ Select Option  ------</option>
                                   <option value="debit">debit</option>
                                   <option value="credit">credit</option>
                                 </select>
@@ -97,15 +104,15 @@
                                     </div>
                                     <div class="form-group">
                                       <label for="">spender</label>
-                                      <input type="text" class="form-control amount" placeholder=" Enter spender">
-                                      <span class="text-danger amount_error"></span>
+                                      <input type="text" class="form-control spender" placeholder=" Enter spender">
+                                      <span class="text-danger spender_error"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Debit & Credit</label>
                                         <select class="form-control debit_credit">
                                           <option value="debit">------ Select Option  ------</option>
-                                          <option value="debit">debit</option>
-                                          <option value="credit">credit</option>
+                                          <option value="debit">Debit</option>
+                                          <option value="credit">Credit</option>
                                         </select>
                                         <strong class="text-danger" id="debit_credit_error" ></strong>
                                       </div>
@@ -128,6 +135,7 @@
                         <tr>
                             <th class="wd-15p">SL</th>
                             <th class="wd-15p">Bank ID</th>
+                            <th class="wd-15p">Branch Name</th>
                             <th class="wd-15p">Date</th>
                             <th class="wd-15p">Purpose</th>
                             <th class="wd-15p">spender</th>
@@ -148,6 +156,7 @@
 @section('footer')
 <script>
     jQuery(document).ready(function(){
+        showbranchEditData();
         showData();
             // *************************************** DataInsert section *********************
         jQuery(document).on('click','.SaveData',function(){
@@ -156,36 +165,36 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-                var company_id = jQuery('.company_id').val();
-                var companyName = jQuery('.companyName').val();
-                var companyAddress = jQuery('.companyAddress').val();
-                var companyEmail = jQuery('.companyEmail').val();
-                var companyPhNO = jQuery('.companyPhNO').val();
-                var companyManagerName = jQuery('.companyManagerName').val();
-                var due = jQuery('.due').val();
+                var bankId = jQuery('.bankId').val();
+                var branch_name = jQuery('.branch_name').val();
+                var date = jQuery('.date').val();
+                var purpose = jQuery('.purpose').val();
+                var spender = jQuery('.spender').val();
+                var debit_credit = jQuery('.debit_credit').val();
+                var amount = jQuery('.amount').val();
 
             $.ajax({
-                url:'/company/insert',
+                url:'/bank/saving/insert',
                 type:'POST',
                 dataType:'json',
                 data:{
-                    'company_id':company_id,
-                    'companyName':companyName,
-                    'companyAddress':companyAddress,
-                    'companyEmail':companyEmail,
-                    'companyPhNO':companyPhNO,
-                    'companyManagerName':companyManagerName,
-                    'due':due
+                    'bankId':bankId,
+                    'branch_name':branch_name,
+                    'date':date,
+                    'purpose':purpose,
+                    'spender':spender,
+                    'debit_credit':debit_credit,
+                    'amount':amount,
                 },
                 success:function(result){
                     if(result.msg == 'faild'){
-                        jQuery('.company_id_error').text(result.errors.company_id);
-                        jQuery('.companyName_error').text(result.errors.companyName);
-                        jQuery('.companyAddress_error').text(result.errors.companyAddress);
-                        jQuery('.companyEmail_error').text(result.errors.companyEmail);
-                        jQuery('.companyPhNO_error').text(result.errors.companyPhNO);
-                        jQuery('.companyManagerName_error').text(result.errors.companyManagerName);
-                        jQuery('.due_error').text(result.errors.due);
+                        jQuery('.bankId_error').text(result.errors.bankId);
+                        jQuery('.branch_name_error').text(result.errors.branch_name);
+                        jQuery('date_error').text(result.errors.date);
+                        jQuery('.purpose_error').text(result.errors.purpose);
+                        jQuery('.spender_error').text(result.errors.spender);
+                        jQuery('.debit_credit_error').text(result.errors.debit_credit);
+                        jQuery('.amount_error').text(result.errors.amount);
                     }
                     else{
                         showData();
@@ -206,13 +215,13 @@
                         icon: 'success',
                         title: 'Product Insert Successfully'
                         })
-                        jQuery('.company_id').val(null);
-                        jQuery('.companyName').val(null);
-                        jQuery('.companyAddress').val(null);
-                        jQuery('.companyEmail').val(null);
-                        jQuery('.companyPhNO').val(null);
-                        jQuery('.companyManagerName').val(null);
-                        jQuery('.due').val(null);
+                        jQuery('.bankId').val(null);
+                        jQuery('.branch_name').val(null);
+                        jQuery('.date').val(null);
+                        jQuery('.purpose').val(null);
+                        jQuery('.spender').val(null);
+                        jQuery('.debit_credit').val(null);
+                        jQuery('.amount').val(null);
 
                     }
                 }
@@ -225,7 +234,7 @@
               //*****************************show Data ************************
               function showData(){
               $.ajax({
-                url:'/company/show',
+                url:'/bank/saving/show',
                 type:'GET',
                 dataType:'json',
                 success:function(result){
@@ -234,13 +243,13 @@
                     $.each(result.data,function(key,item){
                       jQuery(".datashow").append('<tr>\
                             <td>'+sl+'</td>\
-                            <td>'+item.company_id+'</td>\
-                            <td>'+item.companyName+'</td>\
-                            <td>'+item.companyAddress+'</td>\
-                            <td> '+item.companyEmail+'</td>\
-                            <td> '+item.companyPhNO+'</td>\
-                            <td> '+item.companyManagerName+'</td>\
-                            <td> '+item.due+'</td>\
+                            <td>'+item.bankId+'</td>\
+                            <td>'+item.branch_name+'</td>\
+                            <td>'+item.date+'</td>\
+                            <td> '+item.purpose+'</td>\
+                            <td> '+item.spender+'</td>\
+                            <td> '+item.debit+'</td>\
+                            <td> '+item.credit+'</td>\
                             <td>\
                                 <button class="btn btn-sm btn-info productedit" data-target="#EditCategory"  data-toggle="modal" value="'+item.id+'"><i class="fa fa-edit"></i> Edit</button>\
                                 <button class="btn btn-sm btn-danger productdelete" value="'+item.id+'"><i class="fa fa-trash"></i> Delete</button>\
@@ -399,7 +408,27 @@
 
          });
 
+         function showbranchEditData(){
+              $.ajax({
+                url:'/bank/saving/branch/show',
+                type:'GET',
+                dataType:'json',
+                success:function(result){
+                    var sl=1;
+                         jQuery('.branch_name').html(' ');
+                    $.each(result.data,function(key,item){
+                        jQuery('.branch_name').append('\
+                        <option value="'+item.branch_name+'">'+item.branch_name+'</option>\
+                        ');
+                           sl++;
+                    });
 
+                }
+
+            });
+        }
+
+        // ****************************** end Branch Show Data**************************
     });
 </script>
 

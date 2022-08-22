@@ -71,6 +71,7 @@ Route::post('/company/update/{id}',[CompanyController::class,'update']);
 Route::get('/bank/saving',[BankSavingController::class,'index'])->name('Banksaving');
 Route::post('/bank/saving/insert',[BankSavingController::class,'store']);
 Route::get('/bank/saving/show',[BankSavingController::class,'show']);
+Route::get('/bank/saving/branch/show',[BankCostController::class,'showbranchName']);
 Route::get('/bank/saving/single/data/show/{id}',[BankSavingController::class,'edit']);
 Route::get('/bank/saving/delete/{id}',[BankSavingController::class,'destroy']);
 Route::post('/bank/saving/update/{id}',[BankSavingController::class,'update']);

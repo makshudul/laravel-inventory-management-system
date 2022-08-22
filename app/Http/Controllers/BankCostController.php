@@ -38,7 +38,7 @@ class BankCostController extends Controller
     public function store(Request $request)
     {
         $validator= validator::make($request->all(),[
-            'bankId'=>'required|unique:bank_costs,bankId',
+            'bankId'=>'required',
             'branch_name'=>'required',
             'date'=>'required|date',
             'purpose'=>'required',
@@ -114,7 +114,7 @@ class BankCostController extends Controller
     public function update(Request $request, $id)
     {
         $validator= validator::make($request->all(),[
-            'bankId'=>'required|unique:bank_costs,bankId,'.$id,
+            'bankId'=>'required',
             'date'=>'required|date',
             'branch_name'=>'required',
             'purpose'=>'required',

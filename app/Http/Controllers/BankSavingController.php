@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BankSaving;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Branch;
 
 class BankSavingController extends Controller
 {
@@ -35,7 +37,41 @@ class BankSavingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator= validator::make($request->all(),[
+            'bankId'=>'required',
+            'branch_name'=>'required',
+            'date'=>'required|date',
+            'purpose'=>'required',
+            'spender'=>'required',
+            'amount'=>'required|integer',
+            'debit_credit'=>'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                 "msg"=>'faild',
+                 "errors"=>$validator->messages(),
+            ]);
+        }
+        else{
+            $datainsert=new BankSaving();
+            $datainsert->bankId = $request->bankId;
+            $datainsert->branch_name = $request->branch_name;
+            $datainsert->date = $request->date;
+            $datainsert->purpose = $request->purpose;
+            $datainsert->spender = $request->spender;
+           if ($request->debit_credit=="debit") {
+              $datainsert->debit=$request->amount;
+           }
+           else if($request->debit_credit=="credit") {
+             $datainsert->credit=$request->amount;
+           }
+
+            $datainsert->save();
+            return response()->json([
+                "msg"=>'success',
+
+            ]);
+        }
     }
 
     /**
@@ -46,7 +82,20 @@ class BankSavingController extends Controller
      */
     public function show(BankSaving $bankSaving)
     {
-        //
+        $data = BankSaving::all();
+        return response()->json([
+            'data'=>$data
+
+        ]);
+
+    }
+    public function showbranchName()
+    {
+        $data = Branch::all();
+        return response()->json([
+            'data'=>$data
+
+        ]);
     }
 
     /**
