@@ -12,7 +12,6 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
                     <!-- Modal -->
                     <div class="modal fade" id="EMDataInsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -214,6 +213,7 @@
                     </table>
                   </div><!-- table-wrapper -->
             </div>
+        </div>
     </div>
 </div>
 @endsection

@@ -149,6 +149,7 @@
                     </table>
                   </div><!-- table-wrapper -->
             </div>
+         </div>
     </div>
 </div>
 @endsection

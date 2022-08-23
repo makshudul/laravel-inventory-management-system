@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductCodeController;
+use App\Http\Controllers\PurchaseController;
 use App\Models\BankSaving;
 use App\Models\Branch;
 
@@ -32,6 +33,16 @@ Route::get('/dashboard', function () {
 // Route Branch Group Controller
 Route::prefix('/branch')->group(function () {
 Route::get('/index',[BranchController::class,'index'])->name('branch');
+Route::post('/insert',[BranchController::class,'store']);
+Route::get('/show',[BranchController::class,'show']);
+Route::get('/single/data/show/{id}',[BranchController::class,'edit']);
+Route::get('/delete/{id}',[BranchController::class,'destroy']);
+Route::post('/update/{id}',[BranchController::class,'update']);
+});
+
+// Route purchase Group Controller
+Route::prefix('/purchase')->group(function () {
+Route::get('/index',[PurchaseController::class,'index'])->name('purchase');
 Route::post('/insert',[BranchController::class,'store']);
 Route::get('/show',[BranchController::class,'show']);
 Route::get('/single/data/show/{id}',[BranchController::class,'edit']);

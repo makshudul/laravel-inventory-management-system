@@ -58,6 +58,13 @@
           <li class="sub-item"><a href="{{ Route('Bankcost') }}" class="sub-link">Bank Cost </a></li>
         </ul>
       </li>
+                       <!-- End bank section  -->
+      <li class="br-menu-item">
+        <a href="{{ Route('purchase') }}" class="br-menu-link with-sub">
+            <i class=" tx-24"></i>
+          <span class="menu-item-label">Purchase</span>
+        </a><!-- br-menu-link -->
+      </li>
     </ul><!-- br-sideleft-menu -->
 
     <br>
