@@ -17,12 +17,14 @@ class CreatePurchaseSummariesTable extends Migration
             $table->id();
             $table->string('branch_name');
             $table->string('company_id');
+            $table->string('invoice_number');
             $table->date('date');
+            $table->integer('total_amount');
             $table->integer('totalQuantity');
             $table->integer('less_amount');
             $table->float('grand_total');
             $table->string('payment');
-            $table->integer('due_amount');
+            $table->integer('due_amount')->default(0);
             $table->timestamps();
         });
     }

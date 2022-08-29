@@ -111,25 +111,30 @@
                 <div class="col-md-4">
                     <div class="">
                      <input type="number" class="form-control grand_quantity" placeholder="Total Quantity " disabled >
+                     <span class="text-danger grand_quantity_error"></span>
                       </div>
                     <div class=" mt-3">
                     <input type="number" class="form-control grand_total_amount" placeholder="Total Amount" disabled  >
+                    <span class="text-danger grand_total_amount_error"></span>
                     </div>
                     <div class="mt-3">
                     <input type="number" class="form-control grand_less_amount" placeholder="Less Amount " >
+                    <span class="text-danger grand_less_amount_error"></span>
                     </div>
                     <div class=" mt-3">
                     <input type="number" class="form-control grand_total" placeholder="Grand Total " disabled  >
+                    <span class="text-danger grand_total_error"></span>
                     </div>
                     <div class=" mt-3">
-                    <input type="text" class="form-control grand_payment" placeholder="Payment "  >
+                    <input type="text" class="form-control grand_payment" placeholder="Payment " >
+                    <span class="text-danger grand_payment_error"></span>
                     </div>
                     <div class=" mt-3">
                     <input type="text" class="form-control grand_due" placeholder="Due Amount" value="0" disabled >
                     </div>
                     <div class=" mt-3 text-center">
                         <button class="btn btn-success"> Print </button>
-                     <button class="btn btn-info"> Save and Delete </button>
+                     <button class="btn btn-info SavePurchase"> Save and Delete </button>
                      </div>
                  </div>
            </div>
@@ -284,7 +289,7 @@
                             <td> '+item.product_quantity+'</td>\
                             <td> '+item.product_total+'</td>\
                             <td>\
-                                <button class="btn btn-sm btn-danger productdelete" value="'+item.id+'"><i class="fa fa-trash"></i> Delete</button>\
+                                <button class="btn btn-sm btn-danger productdelete" value="'+item.slug+'"><i class="fa fa-trash"></i> Delete</button>\
                             </td>\
                            </tr>');
                            total_Quantity+=item.product_quantity;
@@ -303,7 +308,7 @@
 
         // ****************************** Delete Data **************************
         jQuery(document).on('click','.productdelete',function(){
-            var id=jQuery(this).val();
+            var slug=jQuery(this).val();
             Swal.fire({
                     title: 'Are you sure?',
                     text: "Please check your data , this data is deleted",
@@ -315,7 +320,7 @@
                     }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                        url:'/company/delete/'+id,
+                        url:'/purchase/delete/'+slug,
                         type:'GET',
                         dataType:'JSON',
                         success:function(response){
@@ -466,6 +471,93 @@
 
 
         //*******************************end Product Quantity keyup code **********
+
+        //*********************************product purchase summaries *************************//
+        jQuery(document).on('click','.SavePurchase',function(){
+            showData();
+         $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+                var branch_name = jQuery('.branch_name').val();
+                var company_id = jQuery('.company_id').val();
+                var date = jQuery('.date').val();
+                var company_invoice = jQuery('.company_invoice').val();
+                var grand_total_amount= jQuery('.grand_total_amount').val();
+                var grand_quantity= jQuery('.grand_quantity').val();
+                var grand_less_amount= jQuery('.grand_less_amount').val();
+                var grand_total= jQuery('.grand_total').val();
+                var grand_payment= jQuery('.grand_payment').val();
+                var grand_due = jQuery('.grand_due').val();
+
+            $.ajax({
+                url:'/purchase/insert/summaries',
+                type:'POST',
+                dataType:'json',
+                data:{
+                    'company_id':company_id,
+                    'branch_name':branch_name,
+                    'date':date,
+                    'company_invoice':company_invoice,
+                    'grand_total_amount':grand_total_amount,
+                    'grand_quantity':grand_quantity,
+                    'grand_less_amount':grand_less_amount,
+                    'grand_total':grand_total,
+                    'grand_payment':grand_payment,
+                    'grand_due':grand_due,
+
+                },
+                success:function(result){
+                    if(result.msg == 'faild'){
+                        jQuery('.company_id_error').text(result.errors.company_id);
+                        jQuery('.branch_name_error').text(result.errors.branch_name);
+                        jQuery('.date_error').text(result.errors.date);
+                        jQuery('.company_invoice_error').text(result.errors.company_invoice);
+                        jQuery('.grand_total_amount_error').text(result.errors.grand_total_amount);
+                        jQuery('.grand_less_amount_error').text(result.errors.grand_less_amount);
+                        jQuery('.grand_total_error').text(result.errors.grand_total);
+                        jQuery('.grand_payment_error').text(result.errors.grand_payment);
+                    }
+                    else{
+                        showData();
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                        })
+
+                        Toast.fire({
+                        icon: 'success',
+                        title:' Purchase Summary Successfully'
+                        })
+                         jQuery('.branch_name').val(null);
+                         jQuery('.company_id').val(null);
+                         jQuery('.date').val(null);
+                         jQuery('.company_invoice').val(null);
+                         jQuery('.grand_total_amount').val(null);
+                         jQuery('.grand_quantity').val(null);
+                         jQuery('.grand_less_amount').val(null);
+                         jQuery('.grand_total').val(null);
+                         jQuery('.grand_payment').val(null);
+                         jQuery('.grand_due').val(null);
+                         jQuery('.company_due').val(null);
+                         jQuery('.company_name').val(null);
+
+                }
+                }
+
+            });
+
+         });
+        //*********************************end product purchase summaries *************************//
+
     });
 </script>
 

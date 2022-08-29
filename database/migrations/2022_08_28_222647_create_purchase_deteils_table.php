@@ -26,6 +26,7 @@ class CreatePurchaseDeteilsTable extends Migration
             $table->string('product_name');
             $table->integer('product_quantity');
             $table->integer('product_total');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

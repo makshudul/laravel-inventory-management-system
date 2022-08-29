@@ -26,6 +26,7 @@ class CreateTemporaryPurchasesTable extends Migration
             $table->integer('stock')->nullable();
             $table->integer('product_quantity');
             $table->float('product_total');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

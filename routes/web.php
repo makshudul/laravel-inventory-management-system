@@ -44,9 +44,10 @@ Route::post('/update/{id}',[BranchController::class,'update']);
 Route::prefix('/purchase')->group(function () {
 Route::get('/index',[PurchaseController::class,'index'])->name('purchase');
 Route::post('/insert',[PurchaseController::class,'store']);
+Route::post('/insert/summaries',[PurchaseController::class,'storeSummary']);
 Route::get('/show',[PurchaseController::class,'show']);
 Route::get('/single/data/show/{id}',[PurchaseController::class,'edit']);
-Route::get('/delete/{id}',[PurchaseController::class,'destroy']);
+Route::get('/delete/{slug}',[PurchaseController::class,'destroy']);
 Route::post('/update/{id}',[PurchaseController::class,'update']);
 
 Route::get('/branch/show',[PurchaseController::class,'showbranchName']);

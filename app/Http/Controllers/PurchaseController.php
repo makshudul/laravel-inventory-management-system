@@ -8,6 +8,7 @@ use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Product;
 use App\Models\PurchaseDeteils;
+use App\Models\PurchaseSummary;
 use App\Models\Stock;
 use App\Models\temporaryPurchase;
 use Illuminate\Support\Facades\Validator;
@@ -52,7 +53,7 @@ class PurchaseController extends Controller
             'cost_price'=>'required',
             'product_name'=>'required',
             'product_quantity'=>'required',
-            'product_total'=>'required'
+            'product_total'=>'required',
         ]);
         if($validator->fails()){
             return response()->json([
@@ -61,7 +62,7 @@ class PurchaseController extends Controller
             ]);
         }
         else{
-
+                    $slug=rand(1,90000000000);
                if(Stock::Where('branch_id','=',$request->branch_name)->Where('product_code','=',$request->product_code)->exists()){
                 Stock::Where('branch_id','=',$request->branch_name)->Where('product_code','=',$request->product_code)->increment('quantity',$request->product_quantity);
 
@@ -77,6 +78,7 @@ class PurchaseController extends Controller
                  $PurDetils->product_name=$request->product_name;
                  $PurDetils->product_quantity=$request->product_quantity;
                  $PurDetils->product_total=$request->product_total;
+                 $PurDetils->slug=$slug;
                  $PurDetils->save();
                     // this is temporary Purhcase section
                  $Purtem=new temporaryPurchase();
@@ -91,6 +93,7 @@ class PurchaseController extends Controller
                  $Purtem->product_name=$request->product_name;
                  $Purtem->product_quantity=$request->product_quantity;
                  $Purtem->product_total=$request->product_total;
+                 $Purtem->slug=$slug;
                  $Purtem->save();
 
                  $product_quantity=temporaryPurchase::sum('product_quantity');
@@ -119,6 +122,7 @@ class PurchaseController extends Controller
                 $PurDetils->product_name=$request->product_name;
                 $PurDetils->product_quantity=$request->product_quantity;
                 $PurDetils->product_total=$request->product_total;
+                $PurDetils->slug=$slug;
                 $PurDetils->save();
                    // this is temporary Purhcase section
                 $Purtem=new temporaryPurchase();
@@ -133,6 +137,7 @@ class PurchaseController extends Controller
                 $Purtem->product_name=$request->product_name;
                 $Purtem->product_quantity=$request->product_quantity;
                 $Purtem->product_total=$request->product_total;
+                $Purtem->slug=$slug;
                 $Purtem->save();
                 $product_quantity=temporaryPurchase::sum('product_quantity');
                       return response()->json([
@@ -142,6 +147,53 @@ class PurchaseController extends Controller
                         ]);
 
                }
+
+        }
+
+    }
+    public function storeSummary(Request $request)
+    {
+        $validator= validator::make($request->all(),[
+            'company_id'=>'required',
+            'branch_name'=>'required',
+            'date'=>'required',
+            'company_invoice'=>'required',
+            'grand_total_amount'=>'required',
+            'grand_quantity'=>'required',
+            'grand_less_amount'=>'required',
+            'grand_total'=>'required',
+            'grand_payment'=>'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                 "msg"=>'faild',
+                 "errors"=>$validator->messages(),
+            ]);
+        }
+        else{
+               if(Company::Where('company_id','=',$request->company_id)->Where('branch_name','=',$request->branch_name)->exists()){
+                Company::Where('company_id','=',$request->company_id)->Where('branch_name','=',$request->branch_name)->increment('due',$request->grand_due);
+
+                $Pursummary=new PurchaseSummary();
+                $Pursummary->branch_name=$request->branch_name;;
+                 $Pursummary->company_id=$request->company_id;
+                 $Pursummary->date=$request->date;
+                 $Pursummary->invoice_number=$request->company_invoice;
+                 $Pursummary->total_amount=$request->grand_total_amount;
+                 $Pursummary->totalQuantity=$request->grand_quantity;
+                 $Pursummary->less_amount=$request->grand_less_amount;
+                 $Pursummary->grand_total=$request->grand_total;
+                 $Pursummary->payment=$request->grand_payment;
+                 $Pursummary->due_amount=$request->grand_due;
+                 $Pursummary->save();
+
+                temporaryPurchase::truncate();
+
+                return response()->json([
+                    'msg'=>'success',
+                 ]);
+            }
+
 
         }
 
@@ -216,8 +268,13 @@ class PurchaseController extends Controller
      * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Purchase $purchase)
+    public function destroy($slug)
     {
-        //
+       PurchaseDeteils::where('slug',$slug)->delete();
+       temporaryPurchase::where('slug',$slug)->delete();
+       return response()->json([
+        'msg'=>'success'
+
+    ]);
     }
 }
