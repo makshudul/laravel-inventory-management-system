@@ -1,5 +1,9 @@
 @extends('backend.dashboard.mastertemp')
 
+@section('employee')
+    active
+@endsection
+
 @section('breadcrumb')
 <h4>Product</h4>
 <nav class="breadcrumb pd-0 mg-0 tx-12">

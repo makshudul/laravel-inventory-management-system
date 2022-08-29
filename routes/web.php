@@ -43,16 +43,16 @@ Route::post('/update/{id}',[BranchController::class,'update']);
 // Route purchase Group Controller
 Route::prefix('/purchase')->group(function () {
 Route::get('/index',[PurchaseController::class,'index'])->name('purchase');
-Route::post('/insert',[BranchController::class,'store']);
-Route::get('/show',[BranchController::class,'show']);
-Route::get('/single/data/show/{id}',[BranchController::class,'edit']);
-Route::get('/delete/{id}',[BranchController::class,'destroy']);
-Route::post('/update/{id}',[BranchController::class,'update']);
-});
+Route::post('/insert',[PurchaseController::class,'store']);
+Route::get('/show',[PurchaseController::class,'show']);
+Route::get('/single/data/show/{id}',[PurchaseController::class,'edit']);
+Route::get('/delete/{id}',[PurchaseController::class,'destroy']);
+Route::post('/update/{id}',[PurchaseController::class,'update']);
 
-// Route Branch Controller
-Route::get('/product/code',[ProductCodeController::class,'index'])->name('Product_code');
-Route::post('/product/code/insert',[ProductCodeController::class,'store']);
+Route::get('/branch/show',[PurchaseController::class,'showbranchName']);
+Route::get('/branch/company/show/{company_id}/{branch_name}',[PurchaseController::class,'CompanyItemShow']);
+Route::get('/product/show/{product_id}/{branch_name}',[PurchaseController::class,'ProductItemShow']);
+});
 
 //Route Product Controller
 Route::get('/product',[ProductController::class,'index'])->name('product');

@@ -6,6 +6,7 @@ use App\Models\BankSaving;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Branch;
+use App\Models\Product;
 
 class BankSavingController extends Controller
 {
@@ -80,7 +81,7 @@ class BankSavingController extends Controller
      * @param  \App\Models\BankSaving  $bankSaving
      * @return \Illuminate\Http\Response
      */
-    public function show(BankSaving $bankSaving)
+    public function show()
     {
         $data = BankSaving::all();
         return response()->json([
@@ -104,9 +105,13 @@ class BankSavingController extends Controller
      * @param  \App\Models\BankSaving  $bankSaving
      * @return \Illuminate\Http\Response
      */
-    public function edit(BankSaving $bankSaving)
+    public function edit($id)
     {
-        //
+        $data = BankSaving::find($id);
+        return response()->json([
+            'data'=>$data
+
+        ]);
     }
 
     /**
@@ -116,9 +121,45 @@ class BankSavingController extends Controller
      * @param  \App\Models\BankSaving  $bankSaving
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BankSaving $bankSaving)
+    public function update(Request $request, $id)
     {
-        //
+        $validator= validator::make($request->all(),[
+            'bankId'=>'required',
+            'branch_name'=>'required',
+            'date'=>'required|date',
+            'purpose'=>'required',
+            'spender'=>'required',
+            'amount'=>'required|integer',
+            'debit_credit'=>'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                 "msg"=>'faild',
+                 "errors"=>$validator->messages(),
+            ]);
+        }
+        else{
+            $datainsert= BankSaving::find($id);
+            $datainsert->bankId = $request->bankId;
+            $datainsert->branch_name = $request->branch_name;
+            $datainsert->date = $request->date;
+            $datainsert->purpose = $request->purpose;
+            $datainsert->spender = $request->spender;
+           if ($request->debit_credit=="debit") {
+              $datainsert->debit=$request->amount;
+              $datainsert->credit=null;
+           }
+           else if($request->debit_credit=="credit") {
+             $datainsert->credit=$request->amount;
+             $datainsert->debit=null;
+           }
+
+            $datainsert->save();
+            return response()->json([
+                "msg"=>'success',
+
+            ]);
+        }
     }
 
     /**
@@ -127,8 +168,12 @@ class BankSavingController extends Controller
      * @param  \App\Models\BankSaving  $bankSaving
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BankSaving $bankSaving)
+    public function destroy($id)
     {
-        //
+        BankSaving::find($id)->delete();
+        return response()->json([
+            "msg"=>'success',
+
+        ]);
     }
 }

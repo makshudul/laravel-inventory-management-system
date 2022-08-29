@@ -1,5 +1,10 @@
 @extends('backend.dashboard.mastertemp')
 
+@section('bank')
+    active
+@endsection
+
+
 @section('breadcrumb')
 <h4>Product</h4>
 <nav class="breadcrumb pd-0 mg-0 tx-12">
@@ -54,7 +59,7 @@
                             <div class="form-group">
                                 <label for="">Debit & Credit</label>
                                 <select class="form-control debit_credit">
-                                  <option value="">------ Select Option  ------</option>
+
                                   <option value="debit">debit</option>
                                   <option value="credit">credit</option>
                                 </select>
@@ -87,34 +92,47 @@
                                 </button>
                                 </div>
                                 <div class="modal-body">
+                                    <input type="number" class="form-control " id="id">
                                     <div class="form-group">
                                       <label for="">Bank Id</label>
-                                      <input type="number" class="form-control bankId" placeholder="Bank ID">
+                                      <input type="number" class="form-control " id="bankId" placeholder="Bank ID">
                                       <span class="text-danger bankId_error "></span>
                                     </div>
                                     <div class="form-group">
+                                        <label for="">Branch Name</label>
+                                        <select class="form-control" id="branch_name" >
+                                          <option value="">------ Select Branch ------</option>
+                                        </select>
+                                        <span class="text-danger branch_name_error" ></span>
+                                      </div>
+                                    <div class="form-group">
                                       <label for="">Date</label>
-                                      <input type="date" class="form-control date"  >
+                                      <input type="date" class="form-control " id="date"  >
                                       <span class="text-danger date_error"></span>
                                     </div>
                                     <div class="form-group">
                                       <label for="">Purpose </label>
-                                      <textarea type="text" class="form-control purpose" placeholder="Enter Purpose"></textarea>
+                                      <textarea type="text" class="form-control" id="purpose" placeholder="Enter Purpose"></textarea>
                                       <span class="text-danger purpose_error"></span>
                                     </div>
                                     <div class="form-group">
                                       <label for="">spender</label>
-                                      <input type="text" class="form-control spender" placeholder=" Enter spender">
+                                      <input type="text" class="form-control" id="spender" placeholder=" Enter spender">
                                       <span class="text-danger spender_error"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Debit & Credit</label>
-                                        <select class="form-control debit_credit">
-                                          <option value="debit">------ Select Option  ------</option>
+                                        <select class="form-control " id="debit_credit">
+                                          <option value="">------ Select Option  ------</option>
                                           <option value="debit">Debit</option>
                                           <option value="credit">Credit</option>
                                         </select>
                                         <strong class="text-danger" id="debit_credit_error" ></strong>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="">Amount</label>
+                                        <input type="text" class="form-control" id="amount" placeholder=" Enter amount">
+                                        <span class="text-danger amount_error"></span>
                                       </div>
                                </div>
                                 <div class="modal-footer">
@@ -271,18 +289,27 @@
         jQuery(document).on('click','.productedit',function(){
             var id=jQuery(this).val();
             $.ajax({
-               url:'/company/single/data/show/'+id,
+               url:'/bank/saving/single/data/show/'+id,
                type:'GET',
                dataType:'json',
                success:function(result){
                jQuery('#id').val(result.data.id);
-               jQuery('#company_id').val(result.data.company_id);
-               jQuery('#companyName').val(result.data.companyName);
-               jQuery('#companyAddress').val(result.data.companyAddress);
-               jQuery('#companyEmail').val(result.data.companyEmail);
-               jQuery('#companyPhNO').val(result.data.companyPhNO);
-               jQuery('#companyManagerName').val(result.data.companyManagerName);
-               jQuery('#due').val(result.data.due);
+               jQuery('#bankId').val(result.data.bankId);
+               jQuery('#branch_name').val(result.data.branch_name);
+               jQuery('#date').val(result.data.date);
+               jQuery('#purpose').val(result.data.purpose);
+               jQuery('#spender').val(result.data.spender);
+               if(result.data.debit==null){
+                jQuery('#debit_credit').html('<option value="credit">Credit</option>');
+                jQuery('#debit_credit').append('<option value="debit">Debit</option>');
+               jQuery('#amount').val(result.data.credit);
+               }
+               else{
+                jQuery('#debit_credit').html('<option value="debit">Debit</option>');
+                jQuery('#debit_credit').append('<option value="credit">Credit</option>');
+                jQuery('#amount').val(result.data.debit);
+               }
+
                }
 
            });
@@ -304,7 +331,7 @@
                     }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                        url:'/company/delete/'+id,
+                        url:'/bank/saving/delete/'+id,
                         type:'GET',
                         dataType:'JSON',
                         success:function(response){
@@ -342,37 +369,37 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-                var id = jQuery('#id').val();
-                var company_id = jQuery('#company_id').val();
-                var companyName = jQuery('#companyName').val();
-                var companyAddress = jQuery('#companyAddress').val();
-                var companyEmail = jQuery('#companyEmail').val();
-                var companyPhNO = jQuery('#companyPhNO').val();
-                var companyManagerName = jQuery('#companyManagerName').val();
-                var due = jQuery('#due').val();
+                  var id=jQuery('#id').val();
+                 var bankId = jQuery('#bankId').val();
+                var branch_name = jQuery('#branch_name').val();
+                var date = jQuery('#date').val();
+                var purpose = jQuery('#purpose').val();
+                var spender = jQuery('#spender').val();
+                var debit_credit = jQuery('#debit_credit').val();
+                var amount = jQuery('#amount').val();
 
             $.ajax({
-                url:'/company/update/'+id,
+                url:'/bank/saving/update/'+id,
                 type:'POST',
                 dataType:'json',
                 data:{
-                    'company_id':company_id,
-                    'companyName':companyName,
-                    'companyAddress':companyAddress,
-                    'companyEmail':companyEmail,
-                    'companyPhNO':companyPhNO,
-                    'companyManagerName':companyManagerName,
-                    'due':due
+                    'bankId':bankId,
+                    'branch_name':branch_name,
+                    'date':date,
+                    'purpose':purpose,
+                    'spender':spender,
+                    'debit_credit':debit_credit,
+                    'amount':amount,
                 },
                 success:function(result){
                     if(result.msg == 'faild'){
-                        jQuery('#company_id_error').text(result.errors.company_id);
-                        jQuery('#companyName_error').text(result.errors.companyName);
-                        jQuery('#companyAddress_error').text(result.errors.companyAddress);
-                        jQuery('#companyEmail_error').text(result.errors.companyEmail);
-                        jQuery('#companyPhNO_error').text(result.errors.companyPhNO);
-                        jQuery('#companyManagerName_error').text(result.errors.companyManagerName);
-                        jQuery('#due_error').text(result.errors.due);
+                        jQuery('#bankId_error').text(result.errors.bankId);
+                        jQuery('#branch_name_error').text(result.errors.branch_name);
+                        jQuery('#date_error').text(result.errors.date);
+                        jQuery('#purpose_error').text(result.errors.purpose);
+                        jQuery('#spender_error').text(result.errors.spender);
+                        jQuery('#debit_credit_error').text(result.errors.debit_credit);
+                        jQuery('#amount_error').text(result.errors.amount);
                     }
                    else{
                         showData();
@@ -393,14 +420,14 @@
                         icon: 'success',
                         title: 'Product Update Successfully'
                         })
-                         jQuery('#id').val(null);
-                         jQuery('#company_id').val(null);
-                         jQuery('#companyName').val(null);
-                         jQuery('#companyAddress').val(null);
-                         jQuery('#companyEmail').val(null);
-                         jQuery('#companyPhNO').val(null);
-                         jQuery('#companyManagerName').val(null);
-                         jQuery('#due').val(null);
+                        jQuery('#bankId').val(null);
+                        jQuery('#id').val(null);
+                        jQuery('#branch_name').val(null);
+                        jQuery('#date').val(null);
+                        jQuery('#purpose').val(null);
+                        jQuery('#spender').val(null);
+                        jQuery('#debit_credit').val(null);
+                        jQuery('#amount').val(null);
 
                     }
                 }
@@ -415,13 +442,17 @@
                 type:'GET',
                 dataType:'json',
                 success:function(result){
-                    var sl=1;
-                         jQuery('.branch_name').html(' ');
+                         jQuery('.branch_name').html('<option value="">------ Select Option  ------</option>');
                     $.each(result.data,function(key,item){
                         jQuery('.branch_name').append('\
                         <option value="'+item.branch_name+'">'+item.branch_name+'</option>\
                         ');
-                           sl++;
+                    });
+                    jQuery('#branch_name').html(' ');
+                    $.each(result.data,function(key,item){
+                        jQuery('#branch_name').append('\
+                        <option value="'+item.branch_name+'">'+item.branch_name+'</option>\
+                        ');
                     });
 
                 }

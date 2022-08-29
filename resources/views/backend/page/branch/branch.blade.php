@@ -1,4 +1,8 @@
 @extends('backend.dashboard.mastertemp');
+@section('branch')
+    active
+@endsection
+
 @section('breadcrumb')
 <h4>Branch</h4>
 <nav class="breadcrumb pd-0 mg-0 tx-12">
@@ -65,7 +69,7 @@
                                                 <div class="modal-body">
                                                     <input type="number" class="form-control " id="id"  >
                                                     <div class="form-group">
-                                                        <input type="number" class="form-control" id="Branch_name" placeholder="Enter Branch Name">
+                                                        <input type="text" class="form-control" id="Branch_name" placeholder="Enter Branch Name">
                                                         <span class="text-danger " id="branch_name_error"></span>
                                                       </div>
                                                     <div class="form-group">
