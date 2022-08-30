@@ -12,10 +12,6 @@
   </nav>
   @endsection
 @section('content')
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
                     <!-- Modal -->
                     <div class="modal fade" id="DataInsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -140,33 +136,29 @@
                             </div>
                         </div>
             {{-- this is table information section    --}}
-            <div class="br-pagebody">
-                <div class="br-section-wrapper">
-                    <h4 class="br-section-label text-center">Product Information Table</h4>
-                    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#DataInsertModal"><i class="fas fa-plus"></i> Add Product </button>
-                  <div class="table-wrapper">
-                    <table id="datatable1" class="table display ">
-                      <thead>
-                        <tr>
-                          <th class="wd-15p">SL</th>
-                          <th class="wd-15p">Product Code</th>
-                          <th class="wd-15p">Product Name</th>
-                          <th class="wd-20p">Description</th>
-                          <th class="wd-15p">Size</th>
-                          <th class="wd-15p">Color</th>
-                          <th class="wd-15p">Cost Price</th>
-                          <th class="wd-15p">Sales Price</th>
-                          <th class="wd-25p">Action</th>
-                          <th class="wd-25p">**</th>
-                        </tr>
-                      </thead>
-                      <tbody class="datashow">
-                      </tbody>
-                    </table>
-                  </div><!-- table-wrapper -->
-            </div>
-    </div>
-</div>
+           <div class="col-md-12">
+            <div class="table table-striped">
+                <h4 class="br-section-label text-center">Product Information Table</h4>
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#DataInsertModal"><i class="fas fa-plus"></i> Add Product </button>
+                <table id="datatable1" class="table display ">
+                  <thead>
+                    <tr>
+                      <th class="wd-15p">SL</th>
+                      <th class="wd-15p">Product Code</th>
+                      <th class="wd-15p">Product Name</th>
+                      <th class="wd-20p">Description</th>
+                      <th class="wd-15p">Size</th>
+                      <th class="wd-15p">Color</th>
+                      <th class="wd-15p">Cost Price</th>
+                      <th class="wd-15p">Sales Price</th>
+                      <th class="wd-25p">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody class="datashow">
+                  </tbody>
+                </table>
+              </div><!-- table-wrapper -->
+           </div>
 @endsection
 
 @section('footer')

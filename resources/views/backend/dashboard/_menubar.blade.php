@@ -60,9 +60,23 @@
       </li>
                        <!-- End bank section  -->
       <li class="br-menu-item">
-        <a href="{{ Route('purchase') }}" class="br-menu-link with-sub  @yield('purchase')">
+        <a href="{{ Route('purchase') }}" class="br-menu-link  @yield('purchase')">
             <i class=" fas fa-box tx-24"></i>
           <span class="menu-item-label">Purchase</span>
+        </a><!-- br-menu-link -->
+      </li>
+                       <!-- End purchase section  -->
+      <li class="br-menu-item">
+        <a href="{{ Route('sales') }}" class="br-menu-link   @yield('sales')">
+            <i class=" fas fa-coins tx-24"></i>
+          <span class="menu-item-label">Sale</span>
+        </a><!-- br-menu-link -->
+      </li>
+                       <!-- End sales section  -->
+      <li class="br-menu-item">
+        <a href="{{ Route('sales') }}" class="br-menu-link  @yield('stock')">
+            <i class=" fas fa-store tx-24"></i>
+          <span class="menu-item-label">Stock</span>
         </a><!-- br-menu-link -->
       </li>
     </ul><!-- br-sideleft-menu -->

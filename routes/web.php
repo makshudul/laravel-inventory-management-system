@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductCodeController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SalesController;
 use App\Models\BankSaving;
 use App\Models\Branch;
 
@@ -46,13 +47,20 @@ Route::get('/index',[PurchaseController::class,'index'])->name('purchase');
 Route::post('/insert',[PurchaseController::class,'store']);
 Route::post('/insert/summaries',[PurchaseController::class,'storeSummary']);
 Route::get('/show',[PurchaseController::class,'show']);
-Route::get('/single/data/show/{id}',[PurchaseController::class,'edit']);
 Route::get('/delete/{slug}',[PurchaseController::class,'destroy']);
-Route::post('/update/{id}',[PurchaseController::class,'update']);
-
 Route::get('/branch/show',[PurchaseController::class,'showbranchName']);
 Route::get('/branch/company/show/{company_id}/{branch_name}',[PurchaseController::class,'CompanyItemShow']);
 Route::get('/product/show/{product_id}/{branch_name}',[PurchaseController::class,'ProductItemShow']);
+});
+// Route sales Group Controller
+Route::prefix('/sales')->group(function () {
+Route::get('/index',[SalesController::class,'index'])->name('sales');
+Route::post('/insert',[SalesController::class,'store']);
+Route::post('/insert/summaries',[SalesController::class,'storeSummary']);
+Route::get('/show',[PurchaseContrSalesControlleroller::class,'show']);
+Route::get('/delete/{slug}',[SalesController::class,'destroy']);
+Route::get('/branch/show',[SalesController::class,'showbranchName']);
+Route::get('/product/show/{product_id}/{branch_name}',[SalesController::class,'ProductItemShow']);
 });
 
 //Route Product Controller

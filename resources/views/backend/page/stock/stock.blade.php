@@ -1,6 +1,6 @@
 @extends('backend.dashboard.mastertemp')
 
-@section('bank')
+@section('cost')
     active
 @endsection
 
@@ -9,33 +9,35 @@
 <h4>Product</h4>
 <nav class="breadcrumb pd-0 mg-0 tx-12">
     <a class="breadcrumb-item" href="index.html">Dashboard</a>
-    <a class="breadcrumb-item" href="#">Bank Saving</a>
-    <span class="breadcrumb-item active text-success">Bank Saving</span>
+    <a class="breadcrumb-item" href="#">Cost</a>
+    <span class="breadcrumb-item active text-success">Cost</span>
   </nav>
   @endsection
 @section('content')
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
                     <!-- Modal -->
                     <div class="modal fade" id="DataInsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Bank Saving</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Cost Info</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                          </div>
                          <div class="modal-body">
                             <div class="form-group">
-                              <label for="">Bank Id</label>
-                              <input type="number" class="form-control bankId" placeholder="Bank ID">
-                              <span class="text-danger bankId_error "></span>
-                            </div>
-                            <div class="form-group">
                                 <label for="">Branch Name</label>
-                                <select class="form-control branch_name" >
+                                <select class="form-control branch_name " >
                                   <option value="Bogura">------ Select Branch ------</option>
+                                  <option value="Bogura">Bogura</option>
+                                  <option value="Dhaka">Dhaka</option>
+                                  <option value="Gaibandha">Gaibandha</option>
                                 </select>
-                                <span class="text-danger branch_name_error" ></span>
+                                <span class="text-danger branch_name_error"></span>
                               </div>
                             <div class="form-group">
                               <label for="">Date</label>
@@ -44,28 +46,19 @@
                             </div>
                             <div class="form-group">
                               <label for="">Purpose </label>
-                              <textarea type="text" class="form-control purpose" placeholder="Enter Purpose"></textarea>
+                              <input type="text" class="form-control purpose" placeholder="Enter Purpose">
                               <span class="text-danger purpose_error"></span>
                             </div>
                             <div class="form-group">
-                              <label for="">spender</label>
-                              <input type="text" class="form-control spender" placeholder=" Enter spender">
+                              <label for="">Amount</label>
+                              <input type="number" class="form-control amount" placeholder=" Enter Amount">
                               <span class="text-danger amount_error"></span>
                             </div>
                             <div class="form-group">
-                                <label for="">Debit & Credit</label>
-                                <select class="form-control debit_credit">
-
-                                  <option value="debit">debit</option>
-                                  <option value="credit">credit</option>
-                                </select>
-                                <strong class="text-danger" id="debit_credit_error" ></strong>
-                              </div>
-                              <div class="form-group">
-                                <label for="">Amount</label>
-                                <input type="text" class="form-control amount" placeholder=" Enter amount">
-                                <span class="text-danger amount_error"></span>
-                              </div>
+                              <label for="">remark</label>
+                              <input type="text" class="form-control remark" placeholder=" Enter Remark">
+                              <span class="text-danger remark_error"></span>
+                            </div>
                        </div>
 
                         <div class="modal-footer">
@@ -88,48 +81,37 @@
                                 </button>
                                 </div>
                                 <div class="modal-body">
-                                    <input type="number" class="form-control " id="id">
-                                    <div class="form-group">
-                                      <label for="">Bank Id</label>
-                                      <input type="number" class="form-control " id="bankId" placeholder="Bank ID">
-                                      <span class="text-danger bankId_error "></span>
-                                    </div>
                                     <div class="form-group">
                                         <label for="">Branch Name</label>
+                                        <input type="text" class="form-control" id="id"  >
                                         <select class="form-control" id="branch_name" >
-                                          <option value="">------ Select Branch ------</option>
+                                          <option value="Bogura">------ Select Branch ------</option>
+                                          <option value="Bogura">Bogura</option>
+                                          <option value="Dhaka">Dhaka</option>
+                                          <option value="Gaibandha">Gaibandha</option>
                                         </select>
-                                        <span class="text-danger branch_name_error" ></span>
+                                        <span class="text-danger" id="branch_name_error"></span>
                                       </div>
                                     <div class="form-group">
                                       <label for="">Date</label>
-                                      <input type="date" class="form-control " id="date"  >
-                                      <span class="text-danger date_error"></span>
+                                      <input type="date" class="form-control" id="date"  >
+                                      <span class="text-danger" id="date_error"></span>
                                     </div>
                                     <div class="form-group">
                                       <label for="">Purpose </label>
-                                      <textarea type="text" class="form-control" id="purpose" placeholder="Enter Purpose"></textarea>
-                                      <span class="text-danger purpose_error"></span>
+                                      <input type="text" class="form-control" id="purpose" placeholder="Enter Purpose">
+                                      <span class="text-danger " id="purpose_error"></span>
                                     </div>
                                     <div class="form-group">
-                                      <label for="">spender</label>
-                                      <input type="text" class="form-control" id="spender" placeholder=" Enter spender">
-                                      <span class="text-danger spender_error"></span>
+                                      <label for="">Amount</label>
+                                      <input type="number" class="form-control" id="amount" placeholder=" Enter Amount">
+                                      <span class="text-danger" id="amount_error"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Debit & Credit</label>
-                                        <select class="form-control " id="debit_credit">
-                                          <option value="">------ Select Option  ------</option>
-                                          <option value="debit">Debit</option>
-                                          <option value="credit">Credit</option>
-                                        </select>
-                                        <strong class="text-danger" id="debit_credit_error" ></strong>
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="">Amount</label>
-                                        <input type="text" class="form-control" id="amount" placeholder=" Enter amount">
-                                        <span class="text-danger amount_error"></span>
-                                      </div>
+                                      <label for="">Remark</label>
+                                      <input type="text" class="form-control" id="remark" placeholder=" Enter Remark">
+                                      <span class="text-danger " id="remark_error"></span>
+                                    </div>
                                </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -139,20 +121,20 @@
                             </div>
                         </div>
             {{-- this is table information section    --}}
-                    <h4 class="br-section-label text-center">Company Information Table</h4>
-                    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#DataInsertModal"><i class="fas fa-plus"></i> Add Company </button>
+            <div class="br-pagebody">
+                <div class="br-section-wrapper">
+                    <h4 class="br-section-label text-center">Cost Information Table</h4>
+                    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#DataInsertModal"><i class="fas fa-plus"></i> Add Cost </button>
                   <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap">
                       <thead>
                         <tr>
                             <th class="wd-15p">SL</th>
-                            <th class="wd-15p">Bank ID</th>
                             <th class="wd-15p">Branch Name</th>
                             <th class="wd-15p">Date</th>
                             <th class="wd-15p">Purpose</th>
-                            <th class="wd-15p">spender</th>
-                            <th class="wd-15p">Debit</th>
-                            <th class="wd-15p">Credit</th>
+                            <th class="wd-15p">Amount</th>
+                            <th class="wd-15p">Remark</th>
                             <th class="wd-25p">Action</th>
                         </tr>
                       </thead>
@@ -160,12 +142,14 @@
                       </tbody>
                     </table>
                   </div><!-- table-wrapper -->
+            </div>
+    </div>
+</div>
 @endsection
 
 @section('footer')
 <script>
     jQuery(document).ready(function(){
-        showbranchEditData();
         showData();
             // *************************************** DataInsert section *********************
         jQuery(document).on('click','.SaveData',function(){
@@ -174,36 +158,30 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-                var bankId = jQuery('.bankId').val();
                 var branch_name = jQuery('.branch_name').val();
                 var date = jQuery('.date').val();
                 var purpose = jQuery('.purpose').val();
-                var spender = jQuery('.spender').val();
-                var debit_credit = jQuery('.debit_credit').val();
                 var amount = jQuery('.amount').val();
+                var remark = jQuery('.remark').val();
 
             $.ajax({
-                url:'/bank/saving/insert',
+                url:'/cost/insert',
                 type:'POST',
                 dataType:'json',
                 data:{
-                    'bankId':bankId,
                     'branch_name':branch_name,
                     'date':date,
                     'purpose':purpose,
-                    'spender':spender,
-                    'debit_credit':debit_credit,
                     'amount':amount,
+                    'remark':remark
                 },
                 success:function(result){
                     if(result.msg == 'faild'){
-                        jQuery('.bankId_error').text(result.errors.bankId);
                         jQuery('.branch_name_error').text(result.errors.branch_name);
-                        jQuery('date_error').text(result.errors.date);
+                        jQuery('.date_error').text(result.errors.date);
                         jQuery('.purpose_error').text(result.errors.purpose);
-                        jQuery('.spender_error').text(result.errors.spender);
-                        jQuery('.debit_credit_error').text(result.errors.debit_credit);
                         jQuery('.amount_error').text(result.errors.amount);
+                        jQuery('.remark_error').text(result.errors.remark);
                     }
                     else{
                         showData();
@@ -222,15 +200,13 @@
 
                         Toast.fire({
                         icon: 'success',
-                        title: 'Product Insert Successfully'
+                        title: 'Cost Insert Successfully'
                         })
-                        jQuery('.bankId').val(null);
                         jQuery('.branch_name').val(null);
                         jQuery('.date').val(null);
                         jQuery('.purpose').val(null);
-                        jQuery('.spender').val(null);
-                        jQuery('.debit_credit').val(null);
                         jQuery('.amount').val(null);
+                        jQuery('.remark').val(null);
 
                     }
                 }
@@ -243,7 +219,7 @@
               //*****************************show Data ************************
               function showData(){
               $.ajax({
-                url:'/bank/saving/show',
+                url:'/cost/show',
                 type:'GET',
                 dataType:'json',
                 success:function(result){
@@ -252,13 +228,11 @@
                     $.each(result.data,function(key,item){
                       jQuery(".datashow").append('<tr>\
                             <td>'+sl+'</td>\
-                            <td>'+item.bankId+'</td>\
                             <td>'+item.branch_name+'</td>\
                             <td>'+item.date+'</td>\
-                            <td> '+item.purpose+'</td>\
-                            <td> '+item.spender+'</td>\
-                            <td> '+item.debit+'</td>\
-                            <td> '+item.credit+'</td>\
+                            <td>'+item.purpose+'</td>\
+                            <td> '+item.amount+'</td>\
+                            <td> '+item.remark+'</td>\
                             <td>\
                                 <button class="btn btn-sm btn-info productedit" data-target="#EditCategory"  data-toggle="modal" value="'+item.id+'"><i class="fa fa-edit"></i> Edit</button>\
                                 <button class="btn btn-sm btn-danger productdelete" value="'+item.id+'"><i class="fa fa-trash"></i> Delete</button>\
@@ -279,27 +253,16 @@
         jQuery(document).on('click','.productedit',function(){
             var id=jQuery(this).val();
             $.ajax({
-               url:'/bank/saving/single/data/show/'+id,
+               url:'/cost/single/data/show/'+id,
                type:'GET',
                dataType:'json',
                success:function(result){
                jQuery('#id').val(result.data.id);
-               jQuery('#bankId').val(result.data.bankId);
                jQuery('#branch_name').val(result.data.branch_name);
                jQuery('#date').val(result.data.date);
                jQuery('#purpose').val(result.data.purpose);
-               jQuery('#spender').val(result.data.spender);
-               if(result.data.debit==null){
-                jQuery('#debit_credit').html('<option value="credit">Credit</option>');
-                jQuery('#debit_credit').append('<option value="debit">Debit</option>');
-               jQuery('#amount').val(result.data.credit);
-               }
-               else{
-                jQuery('#debit_credit').html('<option value="debit">Debit</option>');
-                jQuery('#debit_credit').append('<option value="credit">Credit</option>');
-                jQuery('#amount').val(result.data.debit);
-               }
-
+               jQuery('#amount').val(result.data.amount);
+               jQuery('#remark').val(result.data.remark);
                }
 
            });
@@ -321,7 +284,7 @@
                     }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                        url:'/bank/saving/delete/'+id,
+                        url:'/cost/delete/'+id,
                         type:'GET',
                         dataType:'JSON',
                         success:function(response){
@@ -359,37 +322,31 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-                  var id=jQuery('#id').val();
-                 var bankId = jQuery('#bankId').val();
+                var id = jQuery('#id').val();
                 var branch_name = jQuery('#branch_name').val();
                 var date = jQuery('#date').val();
                 var purpose = jQuery('#purpose').val();
-                var spender = jQuery('#spender').val();
-                var debit_credit = jQuery('#debit_credit').val();
                 var amount = jQuery('#amount').val();
+                var remark = jQuery('#remark').val();
 
             $.ajax({
-                url:'/bank/saving/update/'+id,
+                url:'/cost/update/'+id,
                 type:'POST',
                 dataType:'json',
                 data:{
-                    'bankId':bankId,
                     'branch_name':branch_name,
                     'date':date,
                     'purpose':purpose,
-                    'spender':spender,
-                    'debit_credit':debit_credit,
                     'amount':amount,
+                    'remark':remark
                 },
                 success:function(result){
                     if(result.msg == 'faild'){
-                        jQuery('#bankId_error').text(result.errors.bankId);
                         jQuery('#branch_name_error').text(result.errors.branch_name);
                         jQuery('#date_error').text(result.errors.date);
                         jQuery('#purpose_error').text(result.errors.purpose);
-                        jQuery('#spender_error').text(result.errors.spender);
-                        jQuery('#debit_credit_error').text(result.errors.debit_credit);
                         jQuery('#amount_error').text(result.errors.amount);
+                        jQuery('#remark_error').text(result.errors.remark);
                     }
                    else{
                         showData();
@@ -408,16 +365,19 @@
 
                         Toast.fire({
                         icon: 'success',
-                        title: 'Product Update Successfully'
+                        title: 'Cost Update Successfully'
                         })
-                        jQuery('#bankId').val(null);
-                        jQuery('#id').val(null);
                         jQuery('#branch_name').val(null);
                         jQuery('#date').val(null);
                         jQuery('#purpose').val(null);
-                        jQuery('#spender').val(null);
-                        jQuery('#debit_credit').val(null);
                         jQuery('#amount').val(null);
+                        jQuery('#remark').val(null);
+                        // this is error value null code
+                        jQuery('#branch_name_error').text(null);
+                        jQuery('#date_error').text(null);
+                        jQuery('#purpose_error').text(null);
+                        jQuery('#amount_error').text(null);
+                        jQuery('#remark_error').text(null);
 
                     }
                 }
@@ -426,31 +386,7 @@
 
          });
 
-         function showbranchEditData(){
-              $.ajax({
-                url:'/bank/saving/branch/show',
-                type:'GET',
-                dataType:'json',
-                success:function(result){
-                         jQuery('.branch_name').html('<option value="">------ Select Option  ------</option>');
-                    $.each(result.data,function(key,item){
-                        jQuery('.branch_name').append('\
-                        <option value="'+item.branch_name+'">'+item.branch_name+'</option>\
-                        ');
-                    });
-                    jQuery('#branch_name').html(' ');
-                    $.each(result.data,function(key,item){
-                        jQuery('#branch_name').append('\
-                        <option value="'+item.branch_name+'">'+item.branch_name+'</option>\
-                        ');
-                    });
 
-                }
-
-            });
-        }
-
-        // ****************************** end Branch Show Data**************************
     });
 </script>
 

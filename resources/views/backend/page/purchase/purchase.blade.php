@@ -15,37 +15,39 @@
   </nav>
   @endsection
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="br-pagebody">
-            <div class="br-section-wrapper">
-                <h3>Add Purchase</h3>
+                <h3 class="text-center text-primary font-weight-bold mb-3">Add Purchase</h3>
                  <div class="border border-danger p-4">
                      <div class="row">
-                        <div class="col-sm-4 mt-3">
-                            <select class="form-control branch_name" >
+                        <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Branch Name : </label>
+                            <select class="form-control mx-sm-3  branch_name" >
                                 <option value="">------ Select Branch ------</option>
                               </select>
                               <span class="text-danger branch_name_error"></span>
                           </div>
-                        <div class="col-sm-4 mt-3">
-                        <input type="text" class="form-control company_id" placeholder="Enter Company ID " >
+                        <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Company ID : </label>
+                        <input type="text" class="form-control  mx-sm-3 company_id" placeholder="Enter Company ID " >
                         <span class="text-danger company_id_error"></span>
                         </div>
-                        <div class="col-sm-4 mt-3">
-                        <input type="text" class="form-control company_name" placeholder="Enter Company Name " value="" >
+                        <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Company Name : </label>
+                        <input type="text" class="form-control  mx-sm-3 company_name" placeholder="Enter Company Name " disabled >
                         <span class="text-danger company_name_error"></span>
                         </div>
-                        <div class="col-sm-4 mt-3">
-                        <input type="date" class="form-control date">
+                        <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold"> Date : </label>
+                        <input type="date" class="form-control  mx-sm-3 date">
                         <span class="text-danger date_error"></span>
                         </div>
-                        <div class="col-sm-4 mt-3">
-                        <input type="text" class="form-control company_invoice" placeholder="Enter Invoice Number " >
+                        <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold"> Purchase Invoice : </label>
+                        <input type="text" class="form-control  mx-sm-3 company_invoice" placeholder="Enter Invoice Number " >
                         <span class="text-danger company_invoice_error"></span>
                         </div>
-                        <div class="col-sm-4 mt-3">
-                        <input type="text" class="form-control company_due" placeholder="Company Due" disabled >
+                        <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Company Due : </label>
+                        <input type="text" class="form-control  mx-sm-3 company_due" placeholder="Company Due" disabled >
                         </div>
 
                      </div>
@@ -54,30 +56,36 @@
                          <!---  this is second section --->
                     <div class="border border-info p-4 mt-4">
                         <div class="row">
-                           <div class="col-sm-4 mt-3">
-                            <input type="number" class="form-control product_code" placeholder="Enter Barcode " >
+                           <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Product Barcode : </label>
+                            <input type="number" class="form-control mx-sm-3 product_code" placeholder="Enter Barcode " >
                             <span class="text-danger product_code_error"></span>
                              </div>
-                           <div class="col-sm-4 mt-3">
-                           <input type="number" class="form-control cost_price " placeholder="Cost Price " disabled>
+                           <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Cost Price : </label>
+                           <input type="number" class="form-control mx-sm-3 cost_price " placeholder="Cost Price " disabled>
                            <span class="text-danger cost_price_error"></span>
                            </div>
-                           <div class="col-sm-4 mt-3">
-                           <input type="number" class="form-control stock " placeholder=" Stock " disabled >
+                           <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Product Stock : </label>
+                           <input type="number" class="form-control mx-sm-3 stock " placeholder=" Stock " disabled >
                            </div>
-                           <div class="col-sm-4 mt-3">
-                           <input type="text" class="form-control product_name" placeholder="Product Name " disabled>
+                           <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Product Name : </label>
+                           <input type="text" class="form-control mx-sm-3 product_name" placeholder="Product Name " disabled>
                            <span class="text-danger product_name_error"></span>
                            </div>
-                           <div class="col-sm-4 mt-3">
-                           <input type="number" class="form-control product_quantity" placeholder="Enter Quantity " >
+                           <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Product Quantity : </label>
+                           <input type="number" class="form-control mx-sm-3 product_quantity" placeholder="Enter Quantity " >
                            <span class="text-danger product_quantity_error"></span>
                            </div>
-                           <div class="col-sm-4 mt-3">
-                           <input type="number" class="form-control product_total" placeholder="Total " disabled >
+                           <div class="form-group form-inline p-1">
+                                 <label for="" class="text-dark font-weight-bold">Total Amount : </label>
+                           <input type="number" class="form-control mx-sm-3 product_total" placeholder="Total " disabled >
                            <span class="text-danger product_total_error"></span>
                            </div>
-                           <div class="col-sm-4 mt-3">
+                           <div class="form-group form-inline p-1">
                             <button class="btn btn-success AddItem"> Add Item </button>
                             </div>
                         </div>
@@ -87,65 +95,71 @@
                <!---  this is third section --->
                <div class="border border-success p-4 mt-4 ">
                 <div class="row">
-                <div class="col-md-8">
-                  <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>SL</th>
-                            <th>Branch Name</th>
-                            <th>Company Name</th>
-                            <th>Date</th>
-                            <th>Product name</th>
-                            <th>Cost Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                <tbody class="datashow">
+                    <div class="col-md-8">
+                        <h3 class="text-center mb-2 font-weight-bold text-info">Purchase History </h3>
+                        <hr class="bg-warning">
+                        <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th>SL</th>
+                                  <th>Branch Name</th>
+                                  <th>Company Name</th>
+                                  <th>Date</th>
+                                  <th>Product name</th>
+                                  <th>Cost Price</th>
+                                  <th>Quantity</th>
+                                  <th>Total</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                            <tbody class="datashow">
 
-                </tbody>
+                          </tbody>
 
-                  </table>
-                </div>
-                <div class="col-md-4">
-                    <div class="">
-                     <input type="number" class="form-control grand_quantity" placeholder="Total Quantity " disabled >
-                     <span class="text-danger grand_quantity_error"></span>
+                          </table>
+
                       </div>
-                    <div class=" mt-3">
-                    <input type="number" class="form-control grand_total_amount" placeholder="Total Amount" disabled  >
-                    <span class="text-danger grand_total_amount_error"></span>
-                    </div>
-                    <div class="mt-3">
-                    <input type="number" class="form-control grand_less_amount" placeholder="Less Amount " >
-                    <span class="text-danger grand_less_amount_error"></span>
-                    </div>
-                    <div class=" mt-3">
-                    <input type="number" class="form-control grand_total" placeholder="Grand Total " disabled  >
-                    <span class="text-danger grand_total_error"></span>
-                    </div>
-                    <div class=" mt-3">
-                    <input type="text" class="form-control grand_payment" placeholder="Payment " >
-                    <span class="text-danger grand_payment_error"></span>
-                    </div>
-                    <div class=" mt-3">
-                    <input type="text" class="form-control grand_due" placeholder="Due Amount" value="0" disabled >
-                    </div>
-                    <div class=" mt-3 text-center">
-                        <button class="btn btn-success"> Print </button>
-                     <button class="btn btn-info SavePurchase"> Save and Delete </button>
-                     </div>
-                 </div>
-           </div>
 
+                      <div class="col-md-4">
+                        <h3 class="text-center mb-2 font-weight-bold text-info">Total Calculation </h3>
+                        <hr class="bg-warning">
+                          <div class="form-group">
+                            <label for="" class="text-dark font-weight-bold">Total Quantity</label>
+                           <input type="number" class="form-control grand_quantity" placeholder="Total Quantity " disabled >
+                           <span class="text-danger grand_quantity_error"></span>
+                            </div>
+                          <div class=" form-group">
+                            <label for="" class="text-dark font-weight-bold">Total Amount</label>
+                          <input type="number" class="form-control grand_total_amount" placeholder="Total Amount" disabled  >
+                          <span class="text-danger grand_total_amount_error"></span>
+                          </div>
+                          <div class="form-group">
+                            <label for="" class="text-dark font-weight-bold">Discount Amount</label>
+                          <input type="number" class="form-control grand_less_amount" placeholder="Less Amount " >
+                          <span class="text-danger grand_less_amount_error"></span>
+                          </div>
+                          <div class=" form-group">
+                            <label for="" class="text-dark font-weight-bold">Grand Total </label>
+                          <input type="number" class="form-control grand_total" placeholder="Grand Total " disabled  >
+                          <span class="text-danger grand_total_error"></span>
+                          </div>
+                          <div class=" form-group">
+                            <label for="" class="text-dark font-weight-bold">Payment</label>
+                          <input type="text" class="form-control grand_payment" placeholder="Payment " >
+                          <span class="text-danger grand_payment_error"></span>
+                          </div>
+                          <div class=" form-group">
+                            <label for="" class="text-dark font-weight-bold">Due Amount</label>
+                          <input type="text" class="form-control grand_due" placeholder="Due Amount" value="0" disabled >
+                          </div>
+                          <div class=" mt-3 text-center">
+                              <button class="btn btn-success"> Print </button>
+                           <button class="btn btn-info SavePurchase"> Save and Delete </button>
+                           </div>
+                      </div>
 
-           </div>
-          </div>
-        </div>
-   </div>
-</div>
-
+                </div>
+             </div>
 @endsection
 @section('footer')
 <script>
@@ -377,8 +391,13 @@
         //***************************start company Id keyup code ********************
       jQuery(document).on('keyup','.company_id',function(event){
         var company_id=jQuery(this).val();
-        var branch_name=jQuery('.branch_name').val();
-        $.ajax({
+        if(company_id==''){
+            jQuery('.company_name').val(null);
+            jQuery('.company_due').val(null);
+        }
+        else{
+            var branch_name=jQuery('.branch_name').val();
+         $.ajax({
             url:'/purchase/branch/company/show/'+company_id+'/'+branch_name,
             type:'GET',
             dataType:'JSON',
@@ -389,6 +408,8 @@
                 });
             }
         });
+        }
+
 
       });
 
@@ -399,25 +420,28 @@
       jQuery(document).on('keyup','.product_code',function(event){
         var product_id=jQuery(this).val();
         var branch_name=jQuery('.branch_name').val();
-        // alert(branch_name)
-        $.ajax({
-            url:'/purchase/product/show/'+product_id+'/'+branch_name,
-            type:'GET',
-            dataType:'JSON',
-            success:function(response){
-                $.each(response.product,function(key,item){
-                    jQuery(".cost_price").val(item.cost_price);
-                    jQuery(".product_name").val(item.name);
+
+        if(product_id ==''){
+            jQuery('.cost_price').val(null);
+            jQuery('.product_name').val(null);
+            jQuery('.stock').val(null);
+        }
+        else{
+                $.ajax({
+                    url:'/purchase/product/show/'+product_id+'/'+branch_name,
+                    type:'GET',
+                    dataType:'JSON',
+                    success:function(response){
+                        $.each(response.product,function(key,item){
+                            jQuery(".cost_price").val(item.cost_price);
+                            jQuery(".product_name").val(item.name);
+                        });
+                        $.each(response.stock,function(key,item){
+                            jQuery(".stock").val(item.quantity);
+                        });
+                    }
                 });
-                $.each(response.stock,function(key,item){
-                    jQuery(".stock").val(item.quantity);
-                });
-
-                // jQuery('.company_due').val(response.data.due);
-
-
-            }
-        });
+        }
 
       });
 

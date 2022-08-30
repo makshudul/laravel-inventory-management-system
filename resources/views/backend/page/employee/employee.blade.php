@@ -189,11 +189,11 @@
                             </div>
                         </div>
             {{-- this is table information section    --}}
-            <div class="br-pagebody">
-                <div class="br-section-wrapper">
+                                                         <!-- this is start  code -->
+
+                  <div class="table-wrapper">
                     <h4 class="br-section-label text-center">Employee Information Table</h4>
                     <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#EMDataInsertModal"><i class="fas fa-plus"></i> Add Employee </button>
-                  <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap">
                       <thead>
                         <tr>
@@ -218,8 +218,6 @@
                   </div><!-- table-wrapper -->
             </div>
         </div>
-    </div>
-</div>
 @endsection
 
 @section('footer')

@@ -25,13 +25,9 @@
       </div>
 
       <div class="br-pagebody">
-        <div class="row row-sm">
-
 
                          {{-- any code add here  --}}
                          @yield('content')
-
-
 
       </div><!-- br-pagebody -->
     </div><!-- br-mainpanel -->

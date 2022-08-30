@@ -12,6 +12,8 @@ use App\Models\PurchaseSummary;
 use App\Models\Stock;
 use App\Models\temporaryPurchase;
 use Illuminate\Support\Facades\Validator;
+use Psy\Readline\Hoa\Console;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class PurchaseController extends Controller
 {
@@ -63,8 +65,8 @@ class PurchaseController extends Controller
         }
         else{
                     $slug=rand(1,90000000000);
-               if(Stock::Where('branch_id','=',$request->branch_name)->Where('product_code','=',$request->product_code)->exists()){
-                Stock::Where('branch_id','=',$request->branch_name)->Where('product_code','=',$request->product_code)->increment('quantity',$request->product_quantity);
+               if(Stock::Where('branch_name','=',$request->branch_name)->Where('product_code','=',$request->product_code)->exists()){
+                Stock::Where('branch_name','=',$request->branch_name)->Where('product_code','=',$request->product_code)->increment('quantity',$request->product_quantity);
 
                 $PurDetils=new PurchaseDeteils();
                  $PurDetils->company_id=$request->company_id;
@@ -95,17 +97,13 @@ class PurchaseController extends Controller
                  $Purtem->product_total=$request->product_total;
                  $Purtem->slug=$slug;
                  $Purtem->save();
-
-                 $product_quantity=temporaryPurchase::sum('product_quantity');
-
                 return response()->json([
                     'msg'=>'update',
-                    'product_quantity'=>$product_quantity
                  ]);
             }
                else{
                 $stockInsert=new Stock();
-                $stockInsert->branch_id=$request->branch_name;
+                $stockInsert->branch_name=$request->branch_name;
                 $stockInsert->product_code=$request->product_code;
                 $stockInsert->quantity=$request->product_quantity;
                 $stockInsert->save();
@@ -139,10 +137,8 @@ class PurchaseController extends Controller
                 $Purtem->product_total=$request->product_total;
                 $Purtem->slug=$slug;
                 $Purtem->save();
-                $product_quantity=temporaryPurchase::sum('product_quantity');
                       return response()->json([
                             "msg"=>'success',
-                            'product_quantity'=>$product_quantity
 
                         ]);
 
@@ -222,7 +218,7 @@ class PurchaseController extends Controller
         ]);
     }
     public function ProductItemShow($product_id,$branch_name){
-        $stock=Stock::Where('product_code','=',$product_id)->Where('branch_id','=',$branch_name)->get();
+        $stock=Stock::Where('product_code','=',$product_id)->Where('branch_name','=',$branch_name)->get();
         $product = Product::Where('product_code','=',$product_id)->get();
         return response()->json([
             'product'=>$product,
@@ -270,6 +266,14 @@ class PurchaseController extends Controller
      */
     public function destroy($slug)
     {
+
+       $data= PurchaseDeteils::where('slug','=',$slug)->get();
+        foreach($data as $pickup){
+            $branch_name=$pickup->branch_name;
+            $product_code=$pickup->product_code;
+            $quantity=$pickup->product_quantity;
+        }
+        Stock::Where('product_code','=',$product_code)->Where('branch_name','=',$branch_name)->decrement('quantity',$quantity);
        PurchaseDeteils::where('slug',$slug)->delete();
        temporaryPurchase::where('slug',$slug)->delete();
        return response()->json([

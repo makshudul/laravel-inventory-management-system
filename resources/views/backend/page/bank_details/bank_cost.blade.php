@@ -16,9 +16,6 @@
   @endsection
 @section('content')
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
                     <!-- Modal -->
                     <div class="modal fade" id="DataInsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -125,8 +122,6 @@
                             </div>
                         </div>
             {{-- this is table information section    --}}
-            <div class="br-pagebody">
-                <div class="br-section-wrapper">
                     <h4 class="br-section-label text-center">Bank Cost  Information Table</h4>
                     <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#DataInsertModal"><i class="fas fa-plus"></i> Bank Cost  </button>
                   <div class="table-wrapper">
@@ -147,9 +142,6 @@
                       </tbody>
                     </table>
                   </div><!-- table-wrapper -->
-            </div>
-    </div>
-</div>
 @endsection
 
 @section('footer')
