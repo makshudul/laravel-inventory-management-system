@@ -95,8 +95,8 @@
                 {{-- this is table information section    --}}
                         <h4 class="br-section-label text-center">Product Information Table</h4>
                         <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#DataInsertModal"><i class="fas fa-plus"></i> Add Branch </button>
-                    <div class="table-wrapper">
-                        <table id="datatable1" class="table display responsive nowrap">
+                        <div class="table-wrapper">
+                          <table id="datatable1" class="table display responsive nowrap">
                         <thead>
                             <tr>
                             <th class="wd-15p">Sl</th>
@@ -107,7 +107,7 @@
                             <th class="wd-25p">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="datashow">
+                        <tbody class="datashow" >
                         </tbody>
                         </table>
                     </div><!-- table-wrapper -->
@@ -345,10 +345,12 @@
 
     });
 </script>
-    {{-- <script>
-$(document).ready( function () {
-    $('#datatable1').DataTable();
-} );
-    </script> --}}
+    <script>
+$('#datatable1').DataTable({
+  bLengthChange: false,
+  searching: false,
+  responsive: true
+});
+    </script>
 
 @endsection

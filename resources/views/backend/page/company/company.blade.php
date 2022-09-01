@@ -146,8 +146,7 @@
                             </div>
                         </div>
             {{-- this is table information section    --}}
-            <div class="br-pagebody">
-                <div class="br-section-wrapper">
+
                 <div class="row">
                  <div class="col-lg-12">
                     <h4 class="br-section-label text-center">Company Information Table</h4>
@@ -174,8 +173,6 @@
                   </div><!-- table-wrapper -->
                  </div>
                 </div>
-              </div>
-            </div>
 @endsection
 
 @section('footer')

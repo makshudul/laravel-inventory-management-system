@@ -121,8 +121,6 @@
                             </div>
                         </div>
             {{-- this is table information section    --}}
-            <div class="br-pagebody">
-                <div class="br-section-wrapper">
                     <h4 class="br-section-label text-center">Cost Information Table</h4>
                     <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#DataInsertModal"><i class="fas fa-plus"></i> Add Cost </button>
                   <div class="table-wrapper">
@@ -143,8 +141,6 @@
                     </table>
                   </div><!-- table-wrapper -->
             </div>
-    </div>
-</div>
 @endsection
 
 @section('footer')

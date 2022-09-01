@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSalesTable extends Migration
+class CreateSaleSummmariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,16 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('sale_summmaries', function (Blueprint $table) {
             $table->id();
             $table->string('branch_name');
             $table->date('date');
             $table->integer('invoice_number');
             $table->string('client_name');
             $table->integer('clientPhNo');
-            $table->string('product_code');
-            $table->string('product_name');
-            $table->integer('sale_price');
-            $table->integer('quantity');
-            $table->integer('total');
-            $table->integer('discount')->default(0);
-            $table->float('grand_total');
-            $table->string('slug')->unique();
+            $table->integer('grand_total_quantity');
+            $table->integer('grand_total_amount');
+            $table->integer('payment_amount');
             $table->timestamps();
         });
     }
@@ -39,6 +34,6 @@ class CreateSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('sale_summmaries');
     }
 }

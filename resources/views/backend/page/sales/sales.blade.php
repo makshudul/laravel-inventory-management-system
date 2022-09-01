@@ -31,9 +31,19 @@
                             <span class="text-danger date_error"></span>
                         </div>
                         <div class="form-group  form-inline p-2">
-                            <label class="text-dark font-weight-bold" for="email" class="control-label">Invoice : </label>
-                            <input type="text" class="form-control mx-sm-3  company_invoice" placeholder="Enter Invoice Number " disabled >
-                            <span class="text-danger company_invoice_error"></span>
+                            <label class="text-dark font-weight-bold" for="" class="control-label">Invoice : </label>
+                            <input type="text" class="form-control mx-sm-3 invoice" placeholder="Enter Invoice Number " value="{{ $saleinvoce }}" disabled >
+                            <span class="text-danger invoice_error"></span>
+                          </div>
+                        <div class="form-group  form-inline p-2">
+                            <label class="text-dark font-weight-bold" for="" class="control-label">Client Name : </label>
+                            <input type="text" class="form-control mx-sm-3  client_name" placeholder="Client Name "  >
+                            <span class="text-danger client_name_error"></span>
+                          </div>
+                        <div class="form-group  form-inline p-2">
+                            <label class="text-dark font-weight-bold" for="" class="control-label">Phone Number : </label>
+                            <input type="number" class="form-control mx-sm-3  phone_number" placeholder="Phone Number "  >
+                            <span class="text-danger phone_number_error"></span>
                           </div>
                      </div>
 
@@ -76,7 +86,7 @@
 
                            <div class="form-group form-inline p-1">
                             <label for="" class="text-dark font-weight-bold">Discount :</label>
-                           <input type="number" class="form-control mx-sm-3  discount " placeholder=" Discount " >
+                           <input type="number" class="form-control mx-sm-3  discount " placeholder=" Discount " value="0" >
                            <span class="text-danger discount_error"></span>
                            </div>
                            <div class="form-group form-inline p-1">
@@ -85,7 +95,7 @@
                            <span class="text-danger productgrand_total_total_error"></span>
                            </div>
                            <div class="form-group p-2">
-                            <button class="btn btn-success AddItem " > Add Item </button>
+                            <button class="btn btn-success AddsalesItem " > Add Item </button>
                             </div>
                         </div>
                    </div>
@@ -101,17 +111,20 @@
                     <thead>
                         <tr>
                             <th>SL</th>
-                            <th>Branch Name</th>
-                            <th>Company Name</th>
+                            <th>B.Name</th>
+                            <th>Invoice</th>
                             <th>Date</th>
-                            <th>Product name</th>
-                            <th>Cost Price</th>
-                            <th>Quantity</th>
+                            <th>C.Name</th>
+                            <th>P.Name</th>
+                            <th>P.Code</th>
+                            <th>Q.</th>
                             <th>Total</th>
+                            <th>%</th>
+                            <th>G.Total</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                <tbody class="datashow">
+                <tbody class="sales-datashow">
 
                 </tbody>
 
@@ -140,8 +153,8 @@
                     <input type="text" class="form-control grand_due" placeholder="Due Amount" value="0" disabled >
                     </div>
                     <div class=" form-group mt-3 text-center">
-                        <button class="btn btn-success"> Print </button>
-                     <button class="btn btn-info SavePurchase"> Save and Delete </button>
+                        <a href="{{ route('invoice',$saleinvoce) }}" class="btn btn-info saleTotalCal" target="_blank" >Print And Save</a>
+                     {{-- <button class="btn btn-info "> Save and Delete </button> --}}
                      </div>
                  </div>
            </div>
@@ -152,10 +165,11 @@
 @section('footer')
 <script>
     jQuery(document).ready(function(){
+
         showbranchEditData();
         showData();
             // *************************************** DataInsert section *********************
-        jQuery(document).on('click','.AddItem',function(){
+        jQuery(document).on('click','.AddsalesItem',function(){
             showData();
          $.ajaxSetup({
                 headers: {
@@ -163,35 +177,35 @@
                 }
             });
                 var branch_name = jQuery('.branch_name').val();
-                var company_id = jQuery('.company_id').val();
-                var company_name = jQuery('.company_name').val();
+                var invoice = jQuery('.invoice').val();
                 var date = jQuery('.date').val();
-                var company_invoice = jQuery('.company_invoice').val();
-                var company_due = jQuery('.company_due').val();
+                var client_name = jQuery('.client_name').val();
+                var phone_number = jQuery('.phone_number').val();
                 var product_code = jQuery('.product_code').val();
-                var cost_price = jQuery('.cost_price').val();
-                var stock = jQuery('.stock').val();
                 var product_name = jQuery('.product_name').val();
+                var sale_price = jQuery('.sale_price').val();
                 var product_quantity = jQuery('.product_quantity').val();
                 var product_total = jQuery('.product_total').val();
+                var discount = jQuery('.discount').val();
+                var productgrand_total = jQuery('.productgrand_total').val();
 
             $.ajax({
-                url:'/purchase/insert',
+                url:'/sales/insert',
                 type:'POST',
                 dataType:'json',
                 data:{
-                    'company_id':company_id,
                     'branch_name':branch_name,
-                    'company_name':company_name,
+                    'invoice':invoice,
                     'date':date,
-                    'company_invoice':company_invoice,
-                    'company_due':company_due,
+                    'client_name':client_name,
+                    'phone_number':phone_number,
                     'product_code':product_code,
-                    'cost_price':cost_price,
-                    'stock':stock,
                     'product_name':product_name,
+                    'sale_price':sale_price,
                     'product_quantity':product_quantity,
                     'product_total':product_total,
+                    'discount':discount,
+                    'productgrand_total':productgrand_total,
                 },
                 success:function(result){
                     if(result.msg == 'faild'){
@@ -202,14 +216,13 @@
                         jQuery('.company_invoice_error').text(result.errors.company_invoice);
                         jQuery('.product_code_error').text(result.errors.product_code);
                         jQuery('.cost_price_error').text(result.errors.cost_price);
-                        jQuery('.stock_error').text(result.errors.stock);
+                        jQuery('.invoice_error').text(result.errors.invoice);
                         jQuery('.product_name_error').text(result.errors.product_name);
                         jQuery('.product_quantity_error').text(result.errors.product_quantity);
                         jQuery('.product_total_error').text(result.errors.product_total);
                     }
-                    else if(result.msg=='update'){
+                    else if(result.msg=='success'){
                         showData();
-                        $('#DataInsertModal').modal('hide');
                       const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -224,78 +237,48 @@
 
                         Toast.fire({
                         icon: 'success',
-                        title: ' Product Purchase Update And Insert Successfully'
+                        title: 'Product Sales Successfolly'
                         })
-
-                         jQuery('.product_code').val(null);
-                         jQuery('.cost_price').val(null);
-                         jQuery('.stock').val(null);
-                         jQuery('.product_name').val(null);
-                         jQuery('.product_quantity').val(null);
-                         jQuery('.product_total').val(null);
-
-
                     }
-                    else{
-                        showData();
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                        })
-
-                        Toast.fire({
-                        icon: 'success',
-                        title: ' Product Purchase Insert Successfully'
-                        })
-                        jQuery('.product_code').val(null);
-                         jQuery('.cost_price').val(null);
-                         jQuery('.stock').val(null);
-                         jQuery('.product_name').val(null);
-                         jQuery('.product_quantity').val(null);
-                         jQuery('.product_total').val(null);
-
-                }
                 }
 
             });
 
          });
-         // **********************************************End Data Insert ************************************
+         // ***********
+        // ***********************************End Data Insert ************************************
 
               //*****************************show Data ************************
               function showData(){
-              $.ajax({
-                url:'/purchase/show',
+                var invoice=jQuery('.invoice').val();
+                $.ajax({
+                url:'/sales/show/'+invoice,
                 type:'GET',
                 dataType:'json',
                 success:function(result){
                     var sl=1;
                     var total_Quantity=0;
                     var product_total=0;
-                    jQuery('.datashow').html('');
+                    jQuery('.sales-datashow').html('');
                     $.each(result.data,function(key,item){
-                      jQuery(".datashow").append('<tr>\
+                      jQuery(".sales-datashow").append('<tr>\
                             <td>'+sl+'</td>\
                             <td>'+item.branch_name+'</td>\
-                            <td>'+item.company_name+'</td>\
+                            <td>'+item.invoice_number+'</td>\
                             <td> '+item.date+'</td>\
+                            <td> '+item.client_name+'</td>\
                             <td> '+item.product_name+'</td>\
-                            <td> '+item.cost_price+'</td>\
-                            <td> '+item.product_quantity+'</td>\
-                            <td> '+item.product_total+'</td>\
+                            <td> '+item.product_code+'</td>\
+                            <td> '+item.quantity+'</td>\
+                            <td> '+item.total+'</td>\
+                            <td> '+item.discount+'</td>\
+                            <td> '+item.grand_total+'</td>\
                             <td>\
-                                <button class="btn btn-sm btn-danger productdelete" value="'+item.slug+'"><i class="fa fa-trash"></i> Delete</button>\
+                                <button class="btn btn-sm btn-danger salesdelete" value="'+item.id+'"><i class="fa fa-trash"></i> Delete</button>\
                             </td>\
                            </tr>');
-                           total_Quantity+=item.product_quantity;
-                           product_total+=item.product_total;
+                           total_Quantity+=item.quantity;
+                           product_total+=item.grand_total;
                            sl++;
                     });
                     jQuery('.grand_quantity').val(total_Quantity);
@@ -309,8 +292,8 @@
         // ****************************** end show Data**************************
 
         // ****************************** Delete Data **************************
-        jQuery(document).on('click','.productdelete',function(){
-            var slug=jQuery(this).val();
+        jQuery(document).on('click','.salesdelete',function(){
+            var id=jQuery(this).val();
             Swal.fire({
                     title: 'Are you sure?',
                     text: "Please check your data , this data is deleted",
@@ -322,7 +305,7 @@
                     }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                        url:'/purchase/delete/'+slug,
+                        url:'/sales/delete/'+id,
                         type:'GET',
                         dataType:'JSON',
                         success:function(response){
@@ -384,6 +367,10 @@
             jQuery('.sale_price').val(null);
             jQuery('.product_name').val(null);
             jQuery('.stock').val(null);
+            jQuery('.product_quantity').val(null);
+            jQuery('.discount').val(null);
+            jQuery('.productgrand_total').val(null);
+            jQuery('.product_total').val(null);
         }
         else{
         $.ajax({
@@ -396,7 +383,7 @@
                     jQuery(".product_name").val(item.name);
                 });
                 $.each(response.stock,function(key,item){
-                    jQuery(".stock").val(item.quantity);
+                   var stock= jQuery(".stock").val(item.quantity);
                 });
 
 
@@ -417,7 +404,12 @@
         var sale_price=parseInt(jQuery('.sale_price').val());
         if(stock < quantity){
             Swal.fire('Stock is not Available')
-            jQuery('.stock').val(null);
+            jQuery('.product_quantity').val(null);
+            jQuery('.product_total').val(null);
+            jQuery('.productgrand_total').val(null);
+        }
+        else if(stock==0){
+            Swal.fire('Stock is null')
         }
         else{
          var result =quantity*sale_price;
@@ -436,7 +428,7 @@
         var discount_total=(product_total*discount)/100;
         var result=product_total-discount_total;
 
-        jQuery('.productgrand_total').val(result);
+        jQuery('.productgrand_total').val(Math.ceil(result));
 
       });
 
@@ -446,7 +438,7 @@
                 //***************************start Grand payment  keyup code ********************
       jQuery(document).on('keyup','.grand_payment',function(event){
         var grand_payment=jQuery(this).val();
-        var grand_total=jQuery('.grand_total').val();
+        var grand_total=jQuery('.grand_total_amount').val();
 
         var result =grand_total-grand_payment;
         jQuery('.grand_due').val(result);
@@ -464,11 +456,8 @@
         jQuery('.company_grand_due').val(result);
       });
 
-
-        //*******************************end Product Quantity keyup code **********
-
         //*********************************product purchase summaries *************************//
-        jQuery(document).on('click','.SavePurchase',function(){
+        jQuery(document).on('click','.saleTotalCal',function(){
             showData();
          $.ajaxSetup({
                 headers: {
@@ -476,43 +465,37 @@
                 }
             });
                 var branch_name = jQuery('.branch_name').val();
-                var company_id = jQuery('.company_id').val();
+                var invoice = jQuery('.invoice').val();
                 var date = jQuery('.date').val();
-                var company_invoice = jQuery('.company_invoice').val();
-                var grand_total_amount= jQuery('.grand_total_amount').val();
+                var client_name = jQuery('.client_name').val();
+                var phone_number = jQuery('.phone_number').val();
                 var grand_quantity= jQuery('.grand_quantity').val();
-                var grand_less_amount= jQuery('.grand_less_amount').val();
-                var grand_total= jQuery('.grand_total').val();
+                var grand_total_amount= jQuery('.grand_total_amount').val();
                 var grand_payment= jQuery('.grand_payment').val();
-                var grand_due = jQuery('.grand_due').val();
-
             $.ajax({
-                url:'/purchase/insert/summaries',
+                url:'/sales/insert/summaries',
                 type:'POST',
                 dataType:'json',
                 data:{
-                    'company_id':company_id,
                     'branch_name':branch_name,
+                    'invoice':invoice,
                     'date':date,
-                    'company_invoice':company_invoice,
-                    'grand_total_amount':grand_total_amount,
+                    'client_name':client_name,
+                    'phone_number':phone_number,
                     'grand_quantity':grand_quantity,
-                    'grand_less_amount':grand_less_amount,
-                    'grand_total':grand_total,
+                    'grand_total_amount':grand_total_amount,
                     'grand_payment':grand_payment,
-                    'grand_due':grand_due,
 
                 },
                 success:function(result){
                     if(result.msg == 'faild'){
-                        jQuery('.company_id_error').text(result.errors.company_id);
                         jQuery('.branch_name_error').text(result.errors.branch_name);
+                        jQuery('.invoice_error').text(result.errors.invoice);
                         jQuery('.date_error').text(result.errors.date);
-                        jQuery('.company_invoice_error').text(result.errors.company_invoice);
+                        jQuery('.client_name_error').text(result.errors.client_name);
+                        jQuery('.phone_number_error').text(result.errors.phone_number);
+                        jQuery('.grand_quantity_error').text(result.errors.grand_quantity);
                         jQuery('.grand_total_amount_error').text(result.errors.grand_total_amount);
-                        jQuery('.grand_less_amount_error').text(result.errors.grand_less_amount);
-                        jQuery('.grand_total_error').text(result.errors.grand_total);
-                        jQuery('.grand_payment_error').text(result.errors.grand_payment);
                     }
                     else{
                         showData();
@@ -530,21 +513,10 @@
 
                         Toast.fire({
                         icon: 'success',
-                        title:' Purchase Summary Successfully'
+                        title:' Sales Summary Successfully'
                         })
-                         jQuery('.branch_name').val(null);
-                         jQuery('.company_id').val(null);
-                         jQuery('.date').val(null);
-                         jQuery('.company_invoice').val(null);
-                         jQuery('.grand_total_amount').val(null);
-                         jQuery('.grand_quantity').val(null);
-                         jQuery('.grand_less_amount').val(null);
-                         jQuery('.grand_total').val(null);
-                         jQuery('.grand_payment').val(null);
-                         jQuery('.grand_due').val(null);
-                         jQuery('.company_due').val(null);
-                         jQuery('.company_name').val(null);
 
+                     location.reload();
                 }
                 }
 

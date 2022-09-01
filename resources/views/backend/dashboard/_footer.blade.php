@@ -20,7 +20,6 @@
 <script src="{{ asset('dashboard_asset/js/ResizeSensor.js')}}"></script>
 <script src="{{ asset('dashboard_asset/js/dashboard.js')}}"></script>
 {{-- custom link  --}}
-<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   $(function(){

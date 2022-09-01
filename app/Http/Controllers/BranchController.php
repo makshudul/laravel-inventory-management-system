@@ -73,7 +73,7 @@ class BranchController extends Controller
      */
     public function show()
     {
-        $data = Branch::all();
+        $data = Branch::paginate(1);
         return response()->json([
             'data'=>$data
 

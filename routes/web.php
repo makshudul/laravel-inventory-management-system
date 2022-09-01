@@ -57,10 +57,11 @@ Route::prefix('/sales')->group(function () {
 Route::get('/index',[SalesController::class,'index'])->name('sales');
 Route::post('/insert',[SalesController::class,'store']);
 Route::post('/insert/summaries',[SalesController::class,'storeSummary']);
-Route::get('/show',[PurchaseContrSalesControlleroller::class,'show']);
-Route::get('/delete/{slug}',[SalesController::class,'destroy']);
+Route::get('/show/{invoice}',[SalesController::class,'show']);
+Route::get('/delete/{id}',[SalesController::class,'destroy']);
 Route::get('/branch/show',[SalesController::class,'showbranchName']);
 Route::get('/product/show/{product_id}/{branch_name}',[SalesController::class,'ProductItemShow']);
+Route::get('/product/sales/{invoice}',[SalesController::class,'invoice'])->name('invoice');
 });
 
 //Route Product Controller
