@@ -1,9 +1,13 @@
 @extends('backend.dashboard.mastertemp')
 
+<!----- this is section for action manu and sub menu --->
 @section('bank')
     active
 @endsection
-
+@section('banksave')
+    active
+@endsection
+<!----- this  section End  --->
 
 @section('breadcrumb')
 <h4>Product</h4>

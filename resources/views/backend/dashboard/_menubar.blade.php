@@ -18,13 +18,10 @@
          <!-- End Branch section  -->
                   <!-- this is product section  -->
       <li class="br-menu-item">
-        <a href="#" class="br-menu-link with-sub @yield('product')">
+        <a href="{{Route('product')}}" class="br-menu-link @yield('product')">
           <i class="fab fa-product-hunt tx-24"></i>
           <span class="menu-item-label">Product</span>
         </a><!-- br-menu-link -->
-        <ul class="br-menu-sub">
-            <li class="sub-item"><a href="{{Route('product')}}" class="sub-link">Insert Product</a></li>
-          </ul>
       </li><!-- br-menu-item -->
                   <!-- this is Employee section  -->
       <li class="br-menu-item">
@@ -54,8 +51,8 @@
           <span class="menu-item-label">Bank Information</span>
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub">
-          <li class="sub-item"><a href="{{ Route('Banksaving') }}" class="sub-link">Bank Saving</a></li>
-          <li class="sub-item"><a href="{{ Route('Bankcost') }}" class="sub-link">Bank Cost </a></li>
+          <li class="sub-item"><a href="{{ Route('Banksaving') }}" class="sub-link  @yield('banksave')">Bank Saving</a></li>
+          <li class="sub-item"><a href="{{ Route('Bankcost') }}" class="sub-link  @yield('bankcost')">Bank Cost </a></li>
         </ul>
       </li>
                        <!-- End bank section  -->
@@ -74,11 +71,37 @@
       </li>
                        <!-- End sales section  -->
       <li class="br-menu-item">
-        <a href="{{ Route('sales') }}" class="br-menu-link  @yield('stock')">
-            <i class=" fas fa-store tx-24"></i>
-          <span class="menu-item-label">Stock</span>
+        <a href="#" class="br-menu-link with-sub  @yield('stock')">
+            <i class="fas fa-store-alt tx-24"></i>
+          <span class="menu-item-label">Stock And Buy </span>
+        </a><!-- br-menu-link -->
+        <ul class="br-menu-sub">
+          <li class="sub-item"><a href="{{ Route('StockProduct') }}" class="sub-link @yield('total_stock')">Total Stock</a></li>
+          <li class="sub-item"><a href="{{ Route('BuyNeed') }}" class="sub-link @yield('buy')">Need Buy </a></li>
+        </ul>
+      </li>
+                       <!-- End Stock section  -->
+                       <label class="sidebar-label pd-x-10 mg-t-20 text-danger ">Working Process</label>
+      <li class="br-menu-item">
+        <a href="#" class="br-menu-link with-sub  @yield('income')">
+            <i class="far fa-credit-card tx-24"></i>
+          <span class="menu-item-label">Income</span>
+        </a><!-- br-menu-link -->
+        <ul class="br-menu-sub">
+          <li class="sub-item"><a href="" class="sub-link @yield('todayincome')">Today Income</a></li>
+          <li class="sub-item"><a href="" class="sub-link @yield('monthlyincome')">Monthly Income </a></li>
+          <li class="sub-item"><a href="" class="sub-link @yield('yearlyincome')">Yearly Income </a></li>
+        </ul>
+      </li>
+                       <!-- End Income  section  -->
+      <li class="br-menu-item">
+        <a href="#" class="br-menu-link  @yield('Approved')">
+            <i class="fas fa-user-shield tx-24"></i>
+          <span class="menu-item-label">Approved User</span>
         </a><!-- br-menu-link -->
       </li>
+                       <!-- End Approved  section  -->
+
     </ul><!-- br-sideleft-menu -->
 
     <br>

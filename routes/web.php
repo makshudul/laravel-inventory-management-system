@@ -8,9 +8,9 @@ use App\Http\Controllers\CostController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductCodeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\StockAndNeedbuyController;
 use App\Models\BankSaving;
 use App\Models\Branch;
 
@@ -52,6 +52,7 @@ Route::get('/branch/show',[PurchaseController::class,'showbranchName']);
 Route::get('/branch/company/show/{company_id}/{branch_name}',[PurchaseController::class,'CompanyItemShow']);
 Route::get('/product/show/{product_id}/{branch_name}',[PurchaseController::class,'ProductItemShow']);
 });
+
 // Route sales Group Controller
 Route::prefix('/sales')->group(function () {
 Route::get('/index',[SalesController::class,'index'])->name('sales');
@@ -62,6 +63,11 @@ Route::get('/delete/{id}',[SalesController::class,'destroy']);
 Route::get('/branch/show',[SalesController::class,'showbranchName']);
 Route::get('/product/show/{product_id}/{branch_name}',[SalesController::class,'ProductItemShow']);
 Route::get('/product/sales/{invoice}',[SalesController::class,'invoice'])->name('invoice');
+});
+// Route Stock Group Controller
+Route::prefix('/stock')->group(function () {
+Route::get('/index',[StockAndNeedbuyController::class,'index'])->name('StockProduct');
+Route::get('/buyNeed',[StockAndNeedbuyController::class,'BuyNeed'])->name('BuyNeed');
 });
 
 //Route Product Controller

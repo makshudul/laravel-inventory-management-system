@@ -3,22 +3,22 @@
 @section('stock')
     active
 @endsection
-@section('total_stock')
+@section('buy')
     active
 @endsection
 
 
 @section('breadcrumb')
-<h4>Product Stock</h4>
+<h4>Need Buy Product</h4>
 <nav class="breadcrumb pd-0 mg-0 tx-12">
     <a class="breadcrumb-item" href="index.html">Dashboard</a>
-    <a class="breadcrumb-item" href="#">Stock</a>
-    <span class="breadcrumb-item active text-success">Stock</span>
+    <a class="breadcrumb-item" href="#">Need Buy Product</a>
+    <span class="breadcrumb-item active text-success">Need Buy Product</span>
   </nav>
   @endsection
 @section('content')
 
-                    <h1 class=" text-center text-info font-weight-bold ">Total Stock Table</h1>
+                    <h1 class=" text-center text-info font-weight-bold ">Need Buy Product Table</h1>
                    <hr class="bg-info mb-4">
                   <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap">
@@ -35,17 +35,17 @@
                         </tr>
                       </thead>
                       <tbody class="datashow">
-                      @foreach ($stockdata as $key=>$stock )
+                      @foreach ($buydata as $key=>$buydata )
                       <tr>
                         <td>{{ $key+1 }}</td>
-                        <td>{{ $stock->branch_name}}</td>
-                        <td>{{ $stock->product_code }}</td>
-                        <td>{{ $stock->quantity }}</td>
-                        <!------ this is relation Stock Model -->
-                        <td>{{ $stock->rel_to_product->name}}</td>
-                        <td>{{ $stock->rel_to_product->des}}</td>
-                        <td>{{ $stock->rel_to_product->cost_price}}</td>
-                        <td>{{ $stock->rel_to_product->sale_price}}</td>
+                        <td>{{ $buydata->branch_name}}</td>
+                        <td>{{ $buydata->product_code }}</td>
+                        <td>{{ $buydata->quantity }}</td>
+                      <!------ this is relation Stock Model -->
+                      <td>{{ $buydata->rel_to_product->name}}</td>
+                      <td>{{ $buydata->rel_to_product->des}}</td>
+                      <td>{{ $buydata->rel_to_product->cost_price}}</td>
+                      <td>{{ $buydata->rel_to_product->sale_price}}</td>
                     </tr>
                       @endforeach
                       </tbody>
