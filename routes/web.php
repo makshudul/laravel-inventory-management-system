@@ -6,6 +6,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CostController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PurchaseController;
@@ -69,6 +70,12 @@ Route::prefix('/stock')->group(function () {
 Route::get('/index',[StockAndNeedbuyController::class,'index'])->name('StockProduct');
 Route::get('/buyNeed',[StockAndNeedbuyController::class,'BuyNeed'])->name('BuyNeed');
 });
+
+// Route Stock Group Controller
+Route::prefix('/stock')->group(function () {
+Route::get('/index/daily/income',[IncomeController::class,'index'])->name('dailyincome');
+Route::get('/buyNeed',[IncomeController::class,'BuyNeed'])->name('BuyNeed');
+    });
 
 //Route Product Controller
 Route::get('/product',[ProductController::class,'index'])->name('product');

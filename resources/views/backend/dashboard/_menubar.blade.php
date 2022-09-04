@@ -88,7 +88,7 @@
           <span class="menu-item-label">Income</span>
         </a><!-- br-menu-link -->
         <ul class="br-menu-sub">
-          <li class="sub-item"><a href="" class="sub-link @yield('todayincome')">Today Income</a></li>
+          <li class="sub-item"><a href="{{ Route('dailyincome') }}" class="sub-link @yield('todayincome')">Today Income</a></li>
           <li class="sub-item"><a href="" class="sub-link @yield('monthlyincome')">Monthly Income </a></li>
           <li class="sub-item"><a href="" class="sub-link @yield('yearlyincome')">Yearly Income </a></li>
         </ul>
