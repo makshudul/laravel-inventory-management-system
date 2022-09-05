@@ -24,6 +24,20 @@ class IncomeController extends Controller
         $othercost=Cost::where('date','=',Carbon::now()->today())->get();
          return view('backend.page.income.todayincome',compact('sales','purchse','othercost'));
     }
+    public function monthlyindex()
+    {
+        $sales=SaleSummmary::whereMonth('date','=',Carbon::now()->format('m'))->get();
+        $purchse=PurchaseSummary::whereMonth('date','=',Carbon::now()->format('m'))->get();
+        $othercost=Cost::whereMonth('date','=',Carbon::now()->format('m'))->get();
+         return view('backend.page.income.monthincome',compact('sales','purchse','othercost'));
+    }
+    public function yearlyindex()
+    {
+        $sales=SaleSummmary::whereYear('date','=',Carbon::now()->format('Y'))->get();
+        $purchse=PurchaseSummary::whereYear('date','=',Carbon::now()->format('Y'))->get();
+        $othercost=Cost::whereYear('date','=',Carbon::now()->format('Y'))->get();
+         return view('backend.page.income.yearly',compact('sales','purchse','othercost'));
+    }
 
     /**
      * Show the form for creating a new resource.

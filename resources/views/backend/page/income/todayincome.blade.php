@@ -17,46 +17,14 @@
   </nav>
   @endsection
 @section('content')
+@php
+    $toalamountsale=0;
+    $totalpurchse=0;
+    $toalotherCost=0;
+@endphp
 
                     <h1 class=" text-center text-info font-weight-bold ">Today income Deteils</h1>
                    <hr class="bg-info mb-4">
-                   <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2 class="text-center text-info">Sales && Purchase && Cost Amount</h2>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                <div class="col-md-4">
-                                    <h5 class="text-center text-success">Total Sales Amount</h5>
-                                    <input type="text" value="556464" class="form-control text-dark font-weight-bold text-center" placeholder="Total Sales" disabled>
-                                </div>
-                                <div class="col-md-4">
-                                    <h5 class="text-center text-success">Total Purchase Amount</h5>
-                                    <input type="text" value="564646" class="form-control text-dark font-weight-bold text-center" placeholder="Total Purchase Amount" disabled>
-                                </div>
-                                <div class="col-md-4">
-                                    <h5 class="text-center text-success">Total Cost Amount</h5>
-                                    <input type="text" value="22555" class="form-control text-dark font-weight-bold text-center" placeholder="Total Cost Amount" disabled >
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h2 class="text-info text-center">Today Total Income </h2>
-                            </div>
-                            <div class="card-body text-center">
-                               <h5 class="text-success">Total Amount : </h5> <br>
-                                  <h4 class="text-info"><span class="text-danger">120056</span> </h4>
-                            </div>
-                        </div>
-                    </div>
-                   </div>
-                   <hr class="bg-info">
                  <div class="row">
                     <div class="col-md-4">
                         <div class="card">
@@ -64,7 +32,7 @@
                                 <h3 class="text-center text-info ">Today Sales</h3>
                             </div>
                             <div class="card-body">
-                                    <table id="datatable1" class="table">
+                                    <table id="Salestable" class="table">
                                       <thead>
                                         <tr>
                                             <th class="wd-15p">SL</th>
@@ -74,7 +42,7 @@
                                             <th class="wd-15p">Total</th>
                                         </tr>
                                       </thead>
-                                      <tbody class="datashow">
+                                      <tbody>
                                      @forelse ($sales as $key=>$sale )
                                          <tr>
                                             <td>{{ $key+1 }}</td>
@@ -83,6 +51,9 @@
                                             <td>{{ $sale->client_name }}</td>
                                             <td>{{ $sale->grand_total_amount }}</td>
                                          </tr>
+                                         @php
+                                         $toalamountsale += $sale->grand_total_amount
+                                          @endphp
                                      @empty
                                      <tr>
                                         <td colspan="5"> No Data found</td>
@@ -90,6 +61,9 @@
 
                                      @endforelse
                                       </tbody>
+                                      @php
+                                          echo $toalamountsale;
+                                      @endphp
                                     </table>
                                   </div>
                         </div>
@@ -100,7 +74,7 @@
                                 <h3 class="text-center text-info ">Today Purchase</h3>
                             </div>
                             <div class="card-body">
-                                    <table id="datatable1" class="table">
+                                    <table id="Purchasetable" class="table">
                                       <thead>
                                         <tr>
                                             <th class="wd-15p">SL</th>
@@ -108,18 +82,23 @@
                                             <th class="wd-15p">Date </th>
                                             <th class="wd-15p">Invoice</th>
                                             <th class="wd-15p">Total</th>
+                                            <th class="wd-15p">Grand Total</th>
                                         </tr>
                                       </thead>
-                                      <tbody class="datashow">
+
+                                      <tbody>
                                         @forelse ($purchse as $key=>$purchse )
                                         <tr>
                                            <td>{{ $key+1 }}</td>
                                            <td>{{ $purchse->branch_name }}</td>
                                            <td>{{ $purchse->date }}</td>
                                            <td>{{ $purchse->invoice_number }}</td>
+                                           <td>{{ $purchse->total_amount }}</td>
                                            <td>{{ $purchse->grand_total }}</td>
-                                           <td>{{ $purchse->grand_total_amount }}</td>
                                         </tr>
+                                        @php
+                                             $totalpurchse += $purchse->grand_total
+                                        @endphp
                                     @empty
                                     <tr>
                                        <td colspan="5"> No Data found</td>
@@ -127,6 +106,9 @@
 
                                     @endforelse
                                       </tbody>
+                                      @php
+                                          echo $totalpurchse
+                                      @endphp
                                     </table>
                             </div>
                         </div>
@@ -137,7 +119,7 @@
                                 <h3 class="text-center text-info ">Today Other Cost</h3>
                             </div>
                             <div class="card-body">
-                                    <table id="datatable1" class="table ">
+                                    <table id="otherCost" class="table table-striped">
                                       <thead>
                                         <tr>
                                             <th class="wd-15p">SL</th>
@@ -147,7 +129,7 @@
                                             <th class="wd-15p">Amount</th>
                                         </tr>
                                       </thead>
-                                      <tbody class="datashow">
+                                      <tbody>
                                         @forelse ($othercost as $key=>$cost )
                                         <tr>
                                            <td>{{ $key+1 }}</td>
@@ -156,6 +138,9 @@
                                            <td>{{ $cost->remark }}</td>
                                            <td>{{ $cost->amount }}</td>
                                         </tr>
+                                        @php
+                                        $toalotherCost += $cost->amount
+                                         @endphp
                                     @empty
                                     <tr>
                                        <td colspan="5"> No Data found</td>
@@ -163,10 +148,72 @@
 
                                     @endforelse
                                       </tbody>
+                                      @php
+                                    echo  $toalotherCost
+                                       @endphp
                                     </table>
                             </div>
                         </div>
                     </div>
+
                  </div>
+                 <hr class="bg-info">
+                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-center text-info">Sales && Purchase && Cost Amount</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                <div class="col-md-4">
+                                    <h5 class="text-center text-success">Total Sales Amount</h5>
+                                    <input type="text" value="{{$toalamountsale  }}" class="form-control text-dark font-weight-bold text-center" placeholder="Total Sales" disabled>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="text-center text-success">Total Purchase Amount</h5>
+                                    <input type="text" value="{{ $totalpurchse }}" class="form-control text-dark font-weight-bold text-center" placeholder="Total Purchase Amount" disabled>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5 class="text-center text-success">Total Cost Amount</h5>
+                                    <input type="text" value="{{ $toalotherCost }}" class="form-control text-dark font-weight-bold text-center" placeholder="Total Cost Amount" disabled >
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-info text-center">Today Total Income </h2>
+                            </div>
+                            @php
+                                $totalincome=$toalamountsale-($totalpurchse+$toalotherCost);
+                            @endphp
+                            <div class="card-body text-center">
+                               <h5 class="text-success">Total Amount : </h5> <br>
+                                  <h4 class="text-info"><span class="text-danger">{{ $totalincome }}</span> </h4>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+@endsection
+
+@section('footer')
+<script>
+    $(document).ready( function () {
+    $('#otherCost').DataTable();
+} );
+</script>
+<script>
+    $(document).ready( function () {
+    $('#Purchasetable').DataTable();
+} );
+</script>
+<script>
+    $(document).ready( function () {
+    $('#Salestable').DataTable();
+} );
+</script>
 @endsection
 

@@ -74,6 +74,8 @@ Route::get('/buyNeed',[StockAndNeedbuyController::class,'BuyNeed'])->name('BuyNe
 // Route Stock Group Controller
 Route::prefix('/stock')->group(function () {
 Route::get('/index/daily/income',[IncomeController::class,'index'])->name('dailyincome');
+Route::get('/index/monthly/income',[IncomeController::class,'monthlyindex'])->name('monthlyincome');
+Route::get('/index/Yearly/income',[IncomeController::class,'yearlyindex'])->name('yearlyincome');
 Route::get('/buyNeed',[IncomeController::class,'BuyNeed'])->name('BuyNeed');
     });
 

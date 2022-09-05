@@ -16,6 +16,7 @@
      <!-- CSS only -->
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="{{ asset('dashboard_asset/css/bracket.css')}}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
 
 
