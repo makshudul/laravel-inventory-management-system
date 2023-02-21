@@ -80,9 +80,11 @@
           <li class="sub-item"><a href="{{ Route('BuyNeed') }}" class="sub-link @yield('buy')">Need Buy </a></li>
         </ul>
       </li>
-                       <!-- End Stock section  -->
-                       <label class="sidebar-label pd-x-10 mg-t-20 text-danger ">Working Process</label>
-      <li class="br-menu-item">
+                       <!-- End Stock and buy section  -->
+   
+   
+        @if (Auth::user()->role==1)
+          <li class="br-menu-item">
         <a href="#" class="br-menu-link with-sub  @yield('income')">
             <i class="far fa-credit-card tx-24"></i>
           <span class="menu-item-label">Income</span>
@@ -92,17 +94,27 @@
           <li class="sub-item"><a href="{{ Route('monthlyincome') }}" class="sub-link @yield('monthlyincome')">Monthly Income </a></li>
           <li class="sub-item"><a href="{{ Route('yearlyincome') }}" class="sub-link @yield('yearlyincome')">Yearly Income </a></li>
         </ul>
-      </li>
+      </li>   
+        @endif
+     
                        <!-- End Income  section  -->
+          <label class="sidebar-label pd-x-10 mg-t-20 text-danger ">Working Process</label>
       <li class="br-menu-item">
-        <a href="#" class="br-menu-link  @yield('Approved')">
+        <a href="{{ Route('productReturn') }}" class="br-menu-link  @yield('return_product')">
+            <i class="fas fa-exchange-alt tx-24"></i>
+          <span class="menu-item-label">Return Product</span>
+        </a><!-- br-menu-link -->
+      </li>
+                       <!-- End Approved  section  -->
+      <li class="br-menu-item">
+        <a href="{{Route('adminArppovedindex')}}" class="br-menu-link  @yield('adminApproved')">
             <i class="fas fa-user-shield tx-24"></i>
           <span class="menu-item-label">Approved User</span>
         </a><!-- br-menu-link -->
       </li>
                        <!-- End Approved  section  -->
 
-    </ul><!-- br-sideleft-menu -->
 
+    </ul><!-- br-sideleft-menu -->
     <br>
   </div><!-- br-sideleft -->

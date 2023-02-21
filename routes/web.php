@@ -8,12 +8,16 @@ use App\Http\Controllers\CostController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductReturnController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\StockAndNeedbuyController;
+use App\Http\Controllers\AdminApprovedController;
 use App\Models\BankSaving;
 use App\Models\Branch;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -68,16 +72,23 @@ Route::get('/product/sales/{invoice}',[SalesController::class,'invoice'])->name(
 // Route Stock Group Controller
 Route::prefix('/stock')->group(function () {
 Route::get('/index',[StockAndNeedbuyController::class,'index'])->name('StockProduct');
-Route::get('/buyNeed',[StockAndNeedbuyController::class,'BuyNeed'])->name('BuyNeed');
+Route::get('/buyNeed/product',[StockAndNeedbuyController::class,'BuyNeed'])->name('BuyNeed');
 });
 
-// Route Stock Group Controller
-Route::prefix('/stock')->group(function () {
-Route::get('/index/daily/income',[IncomeController::class,'index'])->name('dailyincome');
-Route::get('/index/monthly/income',[IncomeController::class,'monthlyindex'])->name('monthlyincome');
-Route::get('/index/Yearly/income',[IncomeController::class,'yearlyindex'])->name('yearlyincome');
-Route::get('/buyNeed',[IncomeController::class,'BuyNeed'])->name('BuyNeed');
-    });
+
+// Route income  Group Controller
+    Route::prefix('/income')->group(function () {
+    Route::get('/index/daily/income',[IncomeController::class,'index'])->name('dailyincome');
+    Route::get('/index/monthly/income',[IncomeController::class,'monthlyindex'])->name('monthlyincome');
+    Route::get('/index/Yearly/income',[IncomeController::class,'yearlyindex'])->name('yearlyincome');
+     });
+
+     // Route Approved system.
+     Route::prefix('/approved')->group(function(){
+        Route::get('/index/Admin/Approved',[AdminApprovedController::class,'index'])->name('adminArppovedindex');
+        // Route::get('/index/monthly/income',[AdminApprovedController::class,'monthlyindex'])->name('monthlyincome');
+        // Route::get('/index/Yearly/income',[AdminApprovedController::class,'yearlyindex'])->name('yearlyincome');
+     });
 
 //Route Product Controller
 Route::get('/product',[ProductController::class,'index'])->name('product');
@@ -129,5 +140,18 @@ Route::get('/show',[CostController::class,'show']);
 Route::get('/single/data/show/{id}',[CostController::class,'edit']);
 Route::get('/delete/{id}',[CostController::class,'destroy']);
 Route::post('/update/{id}',[CostController::class,'update']);
+});
+// Route product return Controller with group
+Route::prefix('/product/return')->group(function () {
+Route::get('/view',[ProductReturnController::class,'index'])->name('productReturn');
+Route::post('/insert',[ProductReturnController::class,'store']);
+Route::get('/show',[ProductReturnController::class,'show']);
+Route::get('/single/data/show/{id}',[ProductReturnController::class,'edit']);
+Route::get('/delete/{id}',[ProductReturnController::class,'destroy']);
+Route::post('/update/{id}',[ProductReturnController::class,'update']);
+});
+// Route product return Controller with group
+Route::prefix('/profile')->group(function () {
+Route::get('/view',[ProfileController::class,'index'])->name('ProfileView');
 });
 require __DIR__.'/auth.php';

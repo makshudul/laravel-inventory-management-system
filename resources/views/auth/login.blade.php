@@ -68,7 +68,7 @@
           </div><!-- form-group -->
           <button type="submit" class="btn btn-info btn-block">Sign In</button>
           </form>
-          <div class="mg-t-60 tx-center">Not yet a member? <a href="" class="tx-info">Sign Up</a></div>
+          <div class="mg-t-60 tx-center">Not yet a member? <a href="{{ ('register') }}" class="tx-info">Sign Up</a></div>
         </div><!-- login-wrapper -->
       </div><!-- overlay-body -->
     </div><!-- d-flex -->

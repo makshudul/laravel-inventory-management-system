@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Stock;
 use Illuminate\Http\Request;
-use App\Models\StockAndNeedbuy;
 
 class StockAndNeedbuyController extends Controller
 {

@@ -1,135 +1,68 @@
 @extends('backend.dashboard.mastertemp');
 
-@section('return_product')
-    active
-@endsection
-
 @section('breadcrumb')
 <h4>Branch</h4>
 <nav class="breadcrumb pd-0 mg-0 tx-12">
     <a class="breadcrumb-item" href="index.html">Dashboard</a>
-    <a class="breadcrumb-item" href="#">Product Return</a>
-    <span class="breadcrumb-item active">Product Return </span>
+    <a class="breadcrumb-item" href="#">Profile</a>
+    <span class="breadcrumb-item active">Profile </span>
   </nav>
 @endsection
 @section('content')
-                                <!-- Button trigger modal -->
-                        <!-- Modal -->
-                        <div class="modal fade" id="DataInsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Return Product </h5>
-                            </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="">Branch Name</label>
-                                        <input type="text" class="form-control branch_name" placeholder="Enter Branch Name" >
-                                        <span class="text-danger branch_name_error"></span>
-                                      </div>
-                                    <div class="form-group">
-                                        <label for="">Product Code</label>
-                                        <input type="text" class="form-control manager" placeholder="Enter Manager Name" >
-                                        <span class="text-danger Manager_error"></span>
-                                   </div>
-                                    <div class="form-group">
-                                        <label for="">Product Name</label>
-                                        <input type="number" class="form-control phone" placeholder="Enter the Phone Name">
-                                        <span class="text-danger phone_error"></span>
-                                   </div>
-                                    <div class="form-group">
-                                        <label for="">Product Price</label>
-                                        <input type="number" class="form-control phone" placeholder="Enter the Phone Name">
-                                        <span class="text-danger phone_error"></span>
-                                   </div>
-                                    <div class="form-group">
-                                        <label for="">Quantity</label>
-                                        <input type="number" class="form-control phone" placeholder="Enter the Phone Name">
-                                        <span class="text-danger phone_error"></span>
-                                   </div>
-                                    <div class="form-group">
-                                        <label for="">Total</label>
-                                        <input type="number" class="form-control phone" placeholder="Enter the Phone Name">
-                                        <span class="text-danger phone_error"></span>
-                                   </div>
-                                    <div class="form-group">
-                                        <label for="">Invoice Number</label>
-                                        <input type="email" class="form-control email" placeholder="Enter Email">
-                                        <span class="text-danger email_error"></span>
-                                   </div>
-                               </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success SaveData">Data Submit</button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                   <!-- End Modal -->
+<div class="br-profile-page">
+<div class="card shadow-base bd-0 rounded-0 widget-4">
+    <div class="card-header ht-75">
+      <div class="hidden-xs-down">
+      </div>
+      <div class="tx-24 hidden-xs-down">
+      </div>
+    </div><!-- card-header -->
+    <div class="card-body">
+      <div class="card-profile-img">
+        <img src="https://via.placeholder.com/500" alt="">
+      </div><!-- card-profile-img -->
+      <h4 class="tx-normal tx-roboto tx-white">{{ Auth::user()->name }}</h4>
+      <p class="mg-b-25">{{ Auth::user()->email }}</p>
 
+      <p class="wd-md-500 mg-md-l-auto mg-md-r-auto mg-b-25">You Must be Change your Name, Password and Profile Image <div class=""><span class="text-danger">N:B - </span>You Don't Change Email</div></p>
 
-                                       <!-- Edit Modal -->
-                                       <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Add Branch </h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                                <div class="modal-body">
-                                                    <input type="number" class="form-control " id="id"  >
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" id="Branch_name" placeholder="Enter Branch Name">
-                                                        <span class="text-danger " id="branch_name_error"></span>
-                                                      </div>
-                                                    <div class="form-group">
-                                                        <label for="">Manager Name</label>
-                                                        <input type="text" class="form-control " id="manager" placeholder="Enter Manager Name" >
-                                                        <span class="text-danger" id="Manager_error"></span>
-                                                   </div>
-                                                    <div class="form-group">
-                                                        <label for="">Phone</label>
-                                                        <input type="number" class="form-control" id="phone" placeholder="Enter the Phone Name">
-                                                        <span class="text-danger" id="phone_error"></span>
-                                                   </div>
-                                                    <div class="form-group">
-                                                        <label for="">email</label>
-                                                        <input type="email" class="form-control" id="email" placeholder="Enter Email">
-                                                        <span class="text-danger" id="email_error"></span>
-                                                   </div>
-                                               </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success updateModal ">Update</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                   <!-- End Modal -->
-                {{-- this is table information section    --}}
-                        <h4 class="br-section-label text-center">Product Return Information Table</h4>
-                        <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#DataInsertModal"><i class="fas fa-plus"></i> Add Product Return </button>
-                        <div class="table-wrapper">
-                          <table id="datatable1" class="table display responsive nowrap">
-                        <thead>
-                            <tr>
-                            <th class="wd-15p">Sl</th>
-                            <th class="wd-15p">Branch Name </th>
-                            <th class="wd-20p">Product Code</th>
-                            <th class="wd-15p">Product Name</th>
-                            <th class="wd-15p">Product Price</th>
-                            <th class="wd-15p">Quantity</th>
-                            <th class="wd-15p">Total</th>
-                            <th class="wd-15p">Invoice Number</th>
-                            <th class="wd-15p">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="datashow" >
-                        </tbody>
-                        </table>
-                    </div><!-- table-wrapper -->
+      <p class="mg-b-0 tx-24">
+        <a href="" class="tx-white-8 mg-r-5"><i class="fab fa-facebook-official"></i></a>
+        <a href="" class="tx-white-8 mg-r-5"><i class="fab fa-twitter"></i></a>
+        <a href="" class="tx-white-8 mg-r-5"><i class="fab fa-pinterest"></i></a>
+        <a href="" class="tx-white-8"><i class="fab fa-instagram"></i></a>
+      </p>
+      <hr class="bg-warning">
+      <div class="row mt-5">
+            <div class="form-group col-md-4 text-left">
+                <label for="">Enter Your Name : </label>
+                <input type="text" class="form-control " placeholder="Enter your Name">
+            </div>
+            <div class="form-group col-md-4 text-left">
+                <label for="">Enter Old Password : </label>
+                <input type="text" class="form-control " placeholder="Enter Old Password">
+            </div>
+            <div class="form-group col-md-4 text-left">
+                <label for="">Enter Your Password : </label>
+                <input type="text" class="form-control " placeholder="Enter New Password">
+            </div>
+            <div class="form-group col-md-4 text-left">
+                <label for="">Enter Your Confrom Password : </label>
+                <input type="text" class="form-control " placeholder="Enter your Name">
+            </div>
+            <div class="form-group col-md-4 text-left">
+                <label for="">Enter Your Image : </label>
+                <input type="file" class="form-control " placeholder="Enter your Name">
+            </div>
+            <div class="col-md-4 text-left mt-4">
+              <button class="btn btn-success">Submit</button>
+            </div>
+        </div>
+      </div>
+    </div><!-- card-body -->
+  </div><!-- card -->
+
+</div>
 
 @endsection
 @section('footer')

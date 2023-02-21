@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Cost;
 use App\Models\Income;
 use App\Models\PurchaseSummary;
@@ -19,24 +19,42 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        $sales=SaleSummmary::where('date','=',Carbon::now()->today())->get();
-        $purchse=PurchaseSummary::where('date','=',Carbon::now()->today())->get();
-        $othercost=Cost::where('date','=',Carbon::now()->today())->get();
-         return view('backend.page.income.todayincome',compact('sales','purchse','othercost'));
+        if(Auth::user()->role == 1){
+            $sales=SaleSummmary::where('date','=',Carbon::now()->today())->get();
+            $purchse=PurchaseSummary::where('date','=',Carbon::now()->today())->get();
+            $othercost=Cost::where('date','=',Carbon::now()->today())->get();
+             return view('backend.page.income.todayincome',compact('sales','purchse','othercost'));
+        }
+        else{
+           return view('backend.page.income.error');
+        }
+   
     }
     public function monthlyindex()
     {
-        $sales=SaleSummmary::whereMonth('date','=',Carbon::now()->format('m'))->get();
-        $purchse=PurchaseSummary::whereMonth('date','=',Carbon::now()->format('m'))->get();
-        $othercost=Cost::whereMonth('date','=',Carbon::now()->format('m'))->get();
-         return view('backend.page.income.monthincome',compact('sales','purchse','othercost'));
+        if(Auth::user()->role == 1){
+            $sales=SaleSummmary::whereMonth('date','=',Carbon::now()->format('m'))->get();
+            $purchse=PurchaseSummary::whereMonth('date','=',Carbon::now()->format('m'))->get();
+            $othercost=Cost::whereMonth('date','=',Carbon::now()->format('m'))->get();
+             return view('backend.page.income.monthincome',compact('sales','purchse','othercost'));
+        }
+        else{
+            return view('backend.page.income.error');
+        }
+       
     }
     public function yearlyindex()
     {
-        $sales=SaleSummmary::whereYear('date','=',Carbon::now()->format('Y'))->get();
-        $purchse=PurchaseSummary::whereYear('date','=',Carbon::now()->format('Y'))->get();
-        $othercost=Cost::whereYear('date','=',Carbon::now()->format('Y'))->get();
-         return view('backend.page.income.yearly',compact('sales','purchse','othercost'));
+        if(Auth::user()->role == 1){
+            $sales=SaleSummmary::whereYear('date','=',Carbon::now()->format('Y'))->get();
+            $purchse=PurchaseSummary::whereYear('date','=',Carbon::now()->format('Y'))->get();
+            $othercost=Cost::whereYear('date','=',Carbon::now()->format('Y'))->get();
+             return view('backend.page.income.yearly',compact('sales','purchse','othercost'));
+        }
+        else{
+            return view('backend.page.income.error');
+        }
+   
     }
 
     /**

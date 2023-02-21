@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductReturn;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ProductReturnController extends Controller
+class AdminApprovedController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,8 @@ class ProductReturnController extends Controller
      */
     public function index()
     {
-        return view('backend.page.return_product.return_product');
+        $alluser=User::all();
+        return view('backend.page.admin_approved.approved',compact('alluser'));
     }
 
     /**
@@ -41,10 +44,10 @@ class ProductReturnController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProductReturn  $productReturn
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductReturn $productReturn)
+    public function show($id)
     {
         //
     }
@@ -52,10 +55,10 @@ class ProductReturnController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductReturn  $productReturn
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductReturn $productReturn)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +67,10 @@ class ProductReturnController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductReturn  $productReturn
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductReturn $productReturn)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +78,10 @@ class ProductReturnController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProductReturn  $productReturn
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductReturn $productReturn)
+    public function destroy($id)
     {
         //
     }

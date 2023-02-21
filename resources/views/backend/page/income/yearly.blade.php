@@ -25,29 +25,6 @@
 
                     <h1 class=" text-center text-info font-weight-bold ">Yearly income Deteils</h1>
                    <hr class="bg-info mb-4">
-                   <div class="row">
-                    <div class="col-md-6">
-                        <div class="card item-center">
-                            <div class="card-header">
-                                <h3 class="text-center text-info ">Form  Year </h3>
-                            </div>
-                            <div class="card-body">
-                                <input type="date" class="form-control col-md-10 font-weight-bold text-success">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card item-center">
-                            <div class="card-header">
-                                <h3 class="text-center text-info ">To  Year </h3>
-                            </div>
-                            <div class="card-body">
-                                <input type="date" class="form-control col-md-10 font-weight-bold text-success">
-                            </div>
-                        </div>
-                    </div>
-                   </div>
-                   <hr class="bg-warning">
                  <div class="row">
                     <div class="col-md-4">
                         <div class="card">
